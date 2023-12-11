@@ -1,3 +1,153 @@
 [submodule "nginx"]
 	path = nginx
 	url = https://github.com/nginx/nginx
+[submodule "modules/echo-nginx-module"]
+	path = modules/echo-nginx-module
+	url = https://github.com/openresty/echo-nginx-module
+[submodule "modules/headers-more-nginx-module"]
+	path = modules/headers-more-nginx-module
+	url = https://github.com/openresty/headers-more-nginx-module
+[submodule "modules/lua-nginx-module"]
+	path = modules/lua-nginx-module
+	url = https://github.com/openresty/lua-nginx-module
+[submodule "modules/lua-upstream-nginx-module"]
+	path = modules/lua-upstream-nginx-module
+	url = https://github.com/openresty/lua-upstream-nginx-module
+[submodule "modules/memc-nginx-module"]
+	path = modules/memc-nginx-module
+	url = https://github.com/openresty/memc-nginx-module
+[submodule "modules/redis2-nginx-module"]
+	path = modules/redis2-nginx-module
+	url = https://github.com/openresty/redis2-nginx-module
+[submodule "modules/set-misc-nginx-module"]
+	path = modules/set-misc-nginx-module
+	url = https://github.com/openresty/set-misc-nginx-module
+[submodule "modules/srcache-nginx-module"]
+	path = modules/srcache-nginx-module
+	url = https://github.com/openresty/srcache-nginx-module
+[submodule "modules/stream-lua-nginx-module"]
+	path = modules/stream-lua-nginx-module
+	url = https://github.com/openresty/stream-lua-nginx-module
+[submodule "modules/lua-resty-balancer"]
+	path = modules/lua-resty-balancer
+	url = https://github.com/openresty/lua-resty-balancer
+[submodule "modules/lua-resty-core"]
+	path = modules/lua-resty-core
+	url = https://github.com/openresty/lua-resty-core
+[submodule "modules/lua-resty-dns"]
+	path = modules/lua-resty-dns
+	url = https://github.com/openresty/lua-resty-dns
+[submodule "modules/lua-resty-lock"]
+	path = modules/lua-resty-lock
+	url = https://github.com/openresty/lua-resty-lock
+[submodule "modules/lua-resty-limit-traffic"]
+	path = modules/lua-resty-limit-traffic
+	url = https://github.com/openresty/lua-resty-limit-traffic
+[submodule "modules/lua-resty-lrucache"]
+	path = modules/lua-resty-lrucache
+	url = https://github.com/openresty/lua-resty-lrucache
+[submodule "modules/lua-resty-memcached"]
+	path = modules/lua-resty-memcached
+	url = https://github.com/openresty/lua-resty-memcached
+[submodule "modules/lua-resty-memcached-shdict"]
+	path = modules/lua-resty-memcached-shdict
+	url = https://github.com/openresty/lua-resty-memcached-shdict
+[submodule "modules/lua-resty-mysql"]
+	path = modules/lua-resty-mysql
+	url = https://github.com/openresty/lua-resty-mysql
+[submodule "modules/lua-resty-redis"]
+	path = modules/lua-resty-redis
+	url = https://github.com/openresty/lua-resty-redis
+[submodule "modules/lua-resty-shdict-simple"]
+	path = modules/lua-resty-shdict-simple
+	url = https://github.com/openresty/lua-resty-shdict-simple
+[submodule "modules/lua-resty-shell"]
+	path = modules/lua-resty-shell
+	url = https://github.com/openresty/lua-resty-shell
+[submodule "modules/lua-resty-signal"]
+	path = modules/lua-resty-signal
+	url = https://github.com/openresty/lua-resty-signal
+[submodule "modules/lua-resty-string"]
+	path = modules/lua-resty-string
+	url = https://github.com/openresty/lua-resty-string
+[submodule "modules/lua-resty-upload"]
+	path = modules/lua-resty-upload
+	url = https://github.com/openresty/lua-resty-upload
+[submodule "modules/lua-resty-upstream-healthcheck"]
+	path = modules/lua-resty-upstream-healthcheck
+	url = https://github.com/openresty/lua-resty-upstream-healthcheck
+[submodule "modules/lua-resty-websocket"]
+	path = modules/lua-resty-websocket
+	url = https://github.com/openresty/lua-resty-websocket
+[submodule "modules/lua-resty-cookie"]
+	path = modules/lua-resty-cookie
+	url = https://github.com/cloudflare/lua-resty-cookie
+[submodule "modules/lua-resty-openidc"]
+	path = modules/lua-resty-openidc
+	url = https://github.com/zmartzone/lua-resty-openidc
+[submodule "modules/lua-resty-session"]
+	path = modules/lua-resty-session
+	url = https://github.com/bungle/lua-resty-session
+[submodule "modules/lua-resty-jwt"]
+	path = modules/lua-resty-jwt
+	url = https://github.com/cdbattags/lua-resty-jwt
+[submodule "modules/lua-resty-hmac"]
+	path = modules/lua-resty-hmac
+	url = https://github.com/jkeys089/lua-resty-hmac
+[submodule "modules/lua-resty-http"]
+	path = modules/lua-resty-http
+	url = https://github.com/pintsized/lua-resty-http
+[submodule "modules/ngx_cache_purge"]
+	path = modules/ngx_cache_purge
+	url = https://github.com/FRiCKLE/ngx_cache_purge
+[submodule "modules/nginx-rtmp-module"]
+	path = modules/nginx-rtmp-module
+	url = https://github.com/arut/nginx-rtmp-module
+[submodule "modules/nginx-dav-ext-module"]
+	path = modules/nginx-dav-ext-module
+	url = https://github.com/arut/nginx-dav-ext-module
+[submodule "modules/ngx_http_enhanced_memcached_module"]
+	path = modules/ngx_http_enhanced_memcached_module
+	url = https://github.com/bpaquet/ngx_http_enhanced_memcached_module
+[submodule "modules/ngx_http_secure_download"]
+	path = modules/ngx_http_secure_download
+	url = https://github.com/replay/ngx_http_secure_download
+[submodule "modules/ngx_devel_kit"]
+	path = modules/ngx_devel_kit
+	url = https://github.com/simplresty/ngx_devel_kit
+[submodule "modules/nginx-sorted-querystring-module"]
+	path = modules/nginx-sorted-querystring-module
+	url = https://github.com/hnakamur/nginx-sorted-querystring-module
+[submodule "modules/ngx_http_pipelog_module"]
+	path = modules/ngx_http_pipelog_module
+	url = https://github.com/pandax381/ngx_http_pipelog_module
+[submodule "modules/nginx-http-shibboleth"]
+	path = modules/nginx-http-shibboleth
+	url = https://github.com/nginx-shib/nginx-http-shibboleth
+[submodule "modules/nginx-lua-saml-service-provider"]
+	path = modules/nginx-lua-saml-service-provider
+	url = https://github.com/hnakamur/nginx-lua-saml-service-provider
+[submodule "modules/nginx-lua-session"]
+	path = modules/nginx-lua-session
+	url = https://github.com/hnakamur/nginx-lua-session
+[submodule "modules/lua-ffi-zlib"]
+	path = modules/lua-ffi-zlib
+	url = https://github.com/hamishforbes/lua-ffi-zlib
+[submodule "modules/SLAXML"]
+	path = modules/SLAXML
+	url = https://github.com/Phrogz/SLAXML
+[submodule "modules/ngx_http_geoip2_module"]
+	path = modules/ngx_http_geoip2_module
+	url = https://github.com/leev/ngx_http_geoip2_module
+[submodule "modules/ngx_upstream_jdomain"]
+	path = modules/ngx_upstream_jdomain
+	url = https://github.com/e98cuenc/ngx_upstream_jdomain
+[submodule "modules/lua-resty-woothee"]
+	path = modules/lua-resty-woothee
+	url = https://github.com/woothee/lua-resty-woothee
+[submodule "modules/lua-resty-jump-consistent-hash"]
+	path = modules/lua-resty-jump-consistent-hash
+	url = https://github.com/ruoshan/lua-resty-jump-consistent-hash
+[submodule "modules/njs"]
+	path = modules/njs
+	url = https://github.com/nginx/njs
