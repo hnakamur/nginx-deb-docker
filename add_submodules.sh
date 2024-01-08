@@ -30,6 +30,8 @@ git submodule add https://github.com/zmartzone/lua-resty-openidc
 git submodule add https://github.com/bungle/lua-resty-session
 git submodule add https://github.com/cdbattags/lua-resty-jwt
 git submodule add https://github.com/jkeys089/lua-resty-hmac
+git submodule add https://github.com/hnakamur/nginx-var-limit-conn-module
+git submodule add https://github.com/hnakamur/nginx-var-limit-req-module
 
 git submodule add https://github.com/pintsized/lua-resty-http
 git submodule add https://github.com/FRiCKLE/ngx_cache_purge
