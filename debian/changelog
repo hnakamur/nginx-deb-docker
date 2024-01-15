@@ -1,4 +1,4 @@
-nginx (1.25.3+mod.2-1ppa1~1hn1DebRelDistrib) DebRelCodename; urgency=medium
+nginx (1.25.3+mod.2-1hn1DebRelDistrib) DebRelCodename; urgency=medium
 
   * Update module sources
   * Add module sources
