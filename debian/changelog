@@ -1,3 +1,11 @@
+nginx (1.25.3+mod.4-1hn1DebRelDistrib) DebRelCodename; urgency=medium
+
+  * Update modules
+  * 0deec9fd6f65d5e125bdb8dceb0d46ea50b4b019 nginx-var-limit-conn-module
+  * 72945c33aee4643d9b195691ad25b0008acf541f nginx-var-limit-req-module
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 18 Jan 2024 13:47:07 +0900
+
 nginx (1.25.3+mod.3-1hn1DebRelDistrib) DebRelCodename; urgency=medium
 
   * Update modules
