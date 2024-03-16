@@ -56,6 +56,8 @@ config.env.%:
 	cp -Pa $(CURDIR)/nginx-var-limit-req-module $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/ModSecurity-nginx $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/njs $(BUILDDIR_$*)/
+	cp -Pa $(CURDIR)/nginx-ssl-fingerprint $(BUILDDIR_$*)/
+	cp -Pa $(CURDIR)/openssl $(BUILDDIR_$*)/
 	touch $@
 
 config.status.nginx: config.env.nginx
@@ -124,6 +126,8 @@ config.status.nginx: config.env.nginx
 		--add-dynamic-module=./nginx-var-limit-conn-module \
 		--add-dynamic-module=./nginx-var-limit-req-module \
 		--add-dynamic-module=./ModSecurity-nginx \
+		--add-dynamic-module=./nginx-ssl-fingerprint \
+		--with-openssl=./openssl \
 		--without-pcre2 \
 		--with-cc-opt="$(CFLAGS)" \
 		--with-ld-opt="$(LDFLAGS)"
@@ -196,6 +200,8 @@ config.status.nginx_debug: config.env.nginx_debug
 		--add-dynamic-module=./nginx-var-limit-conn-module \
 		--add-dynamic-module=./nginx-var-limit-req-module \
 		--add-dynamic-module=./ModSecurity-nginx \
+		--add-dynamic-module=./nginx-ssl-fingerprint \
+		--with-openssl=./openssl \
 		--without-pcre2 \
 		--with-cc-opt="$(CFLAGS)" \
 		--with-ld-opt="$(LDFLAGS)" \

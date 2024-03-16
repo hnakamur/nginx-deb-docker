@@ -160,3 +160,12 @@
 [submodule "modules/ModSecurity-nginx"]
 	path = modules/ModSecurity-nginx
 	url = https://github.com/owasp-modsecurity/ModSecurity-nginx
+[submodule "modules/nginx-ssl-fingerprint"]
+	path = modules/nginx-ssl-fingerprint
+	url = https://github.com/phuslu/nginx-ssl-fingerprint
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/openssl/openssl
+[submodule "modules/openssl"]
+	path = modules/openssl
+	url = https://github.com/openssl/openssl
