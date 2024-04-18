@@ -56,6 +56,7 @@ config.env.%:
 	cp -Pa $(CURDIR)/nginx-var-limit-req-module $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/ModSecurity-nginx $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/njs $(BUILDDIR_$*)/
+	cp -Pa $(CURDIR)/lua-resty-openssl $(BUILDDIR_$*)/
 	touch $@
 
 config.status.nginx: config.env.nginx

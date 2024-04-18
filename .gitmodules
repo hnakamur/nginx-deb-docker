@@ -160,3 +160,6 @@
 [submodule "modules/ModSecurity-nginx"]
 	path = modules/ModSecurity-nginx
 	url = https://github.com/owasp-modsecurity/ModSecurity-nginx
+[submodule "modules/lua-resty-openssl"]
+	path = modules/lua-resty-openssl
+	url = https://github.com/fffonion/lua-resty-openssl

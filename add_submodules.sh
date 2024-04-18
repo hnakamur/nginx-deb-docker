@@ -54,3 +54,4 @@ git submodule add https://github.com/woothee/lua-resty-woothee
 git submodule add https://github.com/ruoshan/lua-resty-jump-consistent-hash
 git submodule add https://github.com/nginx/njs
 git submodule add https://github.com/owasp-modsecurity/ModSecurity-nginx
+git submodule add https://github.com/fffonion/lua-resty-openssl

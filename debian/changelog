@@ -1,3 +1,10 @@
+nginx (1.25.5+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * nginx 1.25.5
+  * 195a8b7b4fadbf1b0b1cb9f1a2007ddda7a7963f lua-resty-openssl (0.4.0-402-g195a8b7)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 18 Apr 2024 17:20:14 +0900
+
 nginx (1.25.4+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.25.4
