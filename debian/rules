@@ -102,6 +102,7 @@ config.status.nginx: config.env.nginx
 		--with-mail=dynamic \
 		--with-mail_ssl_module \
 		--with-stream \
+		--with-stream_geoip_module=dynamic \
 		--with-stream_realip_module \
 		--with-stream_ssl_module \
 		--with-stream_ssl_preread_module \
@@ -175,6 +176,7 @@ config.status.nginx_debug: config.env.nginx_debug
 		--with-mail=dynamic \
 		--with-mail_ssl_module \
 		--with-stream \
+		--with-stream_geoip_module=dynamic \
 		--with-stream_realip_module \
 		--with-stream_ssl_module \
 		--with-stream_ssl_preread_module \
