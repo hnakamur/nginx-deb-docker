@@ -89,6 +89,7 @@ config.status.nginx: config.env.nginx
 		--with-http_gzip_static_module \
 		--with-http_image_filter_module=dynamic \
 		--with-http_mp4_module \
+		--with-http_perl_module=dynamic \
 		--with-http_random_index_module \
 		--with-http_realip_module \
 		--with-http_secure_link_module \
@@ -161,6 +162,7 @@ config.status.nginx_debug: config.env.nginx_debug
 		--with-http_gzip_static_module \
 		--with-http_image_filter_module=dynamic \
 		--with-http_mp4_module \
+		--with-http_perl_module=dynamic \
 		--with-http_random_index_module \
 		--with-http_realip_module \
 		--with-http_secure_link_module \

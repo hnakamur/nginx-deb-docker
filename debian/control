@@ -15,7 +15,8 @@ Build-Depends: debhelper (>= 9~),
                libgd-dev,
                libgeoip-dev,
                libmhash-dev,
-               libmaxminddb-dev
+               libmaxminddb-dev,
+               libperl-dev
 Standards-Version: 3.9.8.0
 Homepage: http://nginx.org
 

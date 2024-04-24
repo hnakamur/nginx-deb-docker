@@ -8,6 +8,7 @@ RUN apt-get update && \
     gcc make \
     debhelper dpkg-dev quilt lsb-release libssl-dev libpcre3-dev zlib1g-dev \
     libexpat1-dev libxslt1-dev libgd-dev libgeoip-dev libmhash-dev libmaxminddb-dev \
+    libperl-dev \
     # libmodsecurity dependencies
     libyajl2 liblmdb0 libfuzzy2
 
