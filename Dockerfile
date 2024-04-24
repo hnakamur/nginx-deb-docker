@@ -18,6 +18,7 @@ RUN apt-get update && \
     softhsm2 \
     libcache-memcached-fast-perl \
     libcache-memcached-perl \
+    libcryptx-perl \
     libfcgi-perl \
     libprotocol-websocket-perl \
     libgd-perl \
