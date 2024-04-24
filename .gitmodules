@@ -163,3 +163,6 @@
 [submodule "modules/lua-resty-openssl"]
 	path = modules/lua-resty-openssl
 	url = https://github.com/fffonion/lua-resty-openssl
+[submodule "nginx-tests"]
+	path = nginx-tests
+	url = https://github.com/nginx/nginx-tests

@@ -10,7 +10,29 @@ RUN apt-get update && \
     libexpat1-dev libxslt1-dev libgd-dev libgeoip-dev libmhash-dev libmaxminddb-dev \
     libperl-dev \
     # libmodsecurity dependencies
-    libyajl2 liblmdb0 libfuzzy2
+    libyajl2 liblmdb0 libfuzzy2 \
+    # for nginx-tests
+    sudo \
+    ffmpeg \
+    memcached \
+    softhsm2 \
+    libcache-memcached-fast-perl \
+    libcache-memcached-perl \
+    libfcgi-perl \
+    libprotocol-websocket-perl \
+    libgd-perl \
+    libio-socket-ssl-perl \
+    libscgi-perl \
+    libengine-pkcs11-openssl \
+    opensc \
+    uwsgi \
+    uwsgi-plugin-python3
+
+# create symbolic links for nginx-tests
+RUN mkdir -p /usr/local/lib/engines
+RUN ln -s /usr/lib/x86_64-linux-gnu/engines-3/pkcs11.so /usr/local/lib/engines/pkcs11.so
+RUN mkdir -p /usr/local/lib/softhsm
+RUN ln -s /usr/lib/softhsm/libsofthsm2.so /usr/local/lib/softhsm/libsofthsm2.so
 
 ARG LUAJIT_DEB_VERSION
 ARG LUAJIT_DEB_OS_ID
@@ -27,20 +49,24 @@ RUN dpkg -i /depends/libmodsecurity3_*.deb
 RUN dpkg -i /depends/libmodsecurity-dev*.deb
 
 ARG SRC_DIR=/src
-ARG BUILD_USER=build
-RUN useradd -m -d ${SRC_DIR} -s /bin/bash ${BUILD_USER}
+ARG BUILD_USER=nginx
+RUN adduser --system --group ${BUILD_USER}
 
-COPY --chown=${BUILD_USER}:${BUILD_USER} ./nginx/ /src/nginx/
-COPY --chown=${BUILD_USER}:${BUILD_USER} ./modules/ /src/nginx/
+COPY --chown=${BUILD_USER}:${BUILD_USER} ./nginx/ ${SRC_DIR}/nginx/
+COPY --chown=${BUILD_USER}:${BUILD_USER} ./modules/ ${SRC_DIR}/nginx/
+
 USER ${BUILD_USER}
 WORKDIR ${SRC_DIR}
 ARG PKG_VERSION
 RUN tar cf - nginx | xz > nginx_${PKG_VERSION}.orig.tar.xz
 
-COPY --chown=${BUILD_USER}:${BUILD_USER} ./debian /src/nginx/debian/
+COPY --chown=${BUILD_USER}:${BUILD_USER} ./debian ${SRC_DIR}/nginx/debian/
 WORKDIR ${SRC_DIR}/nginx
 ARG PKG_REL_DISTRIB
-RUN sed -i "s/DebRelDistrib/${PKG_REL_DISTRIB}/;s/UNRELEASED/$(lsb_release -cs)/" /src/nginx/debian/changelog
+RUN sed -i "s/DebRelDistrib/${PKG_REL_DISTRIB}/;s/UNRELEASED/$(lsb_release -cs)/" ${SRC_DIR}/nginx/debian/changelog
 RUN dpkg-buildpackage -us -uc
+
+COPY --chown=${BUILD_USER}:${BUILD_USER} ./nginx-tests/ ${SRC_DIR}/nginx-tests/
+COPY --chown=${BUILD_USER}:${BUILD_USER} ./run-nginx-tests.sh ${SRC_DIR}/run-nginx-tests.sh
 
 USER root

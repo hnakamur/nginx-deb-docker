@@ -12,6 +12,8 @@ LOGUNLIMITED_BUILDER=logunlimited
 deb-ubuntu2204: build-ubuntu2204
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist:/dist nginx-ubuntu2204 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
+	docker run --rm -it nginx-ubuntu2204 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
+	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist/
 
 build-ubuntu2204: buildkit-logunlimited
@@ -31,7 +33,7 @@ build-ubuntu2204: buildkit-logunlimited
 		--build-arg MODSECURITY_DEB_OS_ID=ubuntu22.04 \
 		-t nginx-ubuntu2204 . \
 	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
-	sudo xz -z --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+	sudo xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04-dist/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2204:
 	docker run --rm -it nginx-ubuntu2204 bash
@@ -40,6 +42,8 @@ run-ubuntu2204:
 deb-debian12: build-debian12
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12-dist:/dist nginx-debian12 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
+	docker run --rm -it nginx-debian12 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12-dist/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.log
+	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12-dist/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12-dist.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12-dist/
 
 build-debian12: buildkit-logunlimited
