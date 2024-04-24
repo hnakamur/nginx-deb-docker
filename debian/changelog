@@ -1,3 +1,9 @@
+nginx (1.26.0+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * nginx 1.26.0
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 24 Apr 2024 20:54:46 +0900
+
 nginx (1.25.5+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.25.5
