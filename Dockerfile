@@ -37,7 +37,7 @@ WORKDIR ${SRC_DIR}
 ARG PKG_VERSION
 RUN tar cf - nginx | xz > nginx_${PKG_VERSION}.orig.tar.xz
 
-COPY --chown=build:build ./debian /src/nginx/debian/
+COPY --chown=${BUILD_USER}:${BUILD_USER} ./debian /src/nginx/debian/
 WORKDIR ${SRC_DIR}/nginx
 ARG PKG_REL_DISTRIB
 RUN sed -i "s/DebRelDistrib/${PKG_REL_DISTRIB}/;s/UNRELEASED/$(lsb_release -cs)/" /src/nginx/debian/changelog
