@@ -3,7 +3,7 @@ PKG_REL_PREFIX=1hn1
 ifdef NO_CACHE
 DOCKER_NO_CACHE=--no-cache
 endif
-LUAJIT_DEB_VERSION=v2.1-20240314
+LUAJIT_DEB_VERSION=v2.1-20240314ubuntu1804
 MOSECURITY_DEB_VERSION=3.0.12-1hn1
 
 LOGUNLIMITED_BUILDER=logunlimited
@@ -67,6 +67,36 @@ build-debian12: buildkit-logunlimited
 
 run-debian12:
 	docker run --rm -it nginx-debian12 bash
+
+# Ubuntu 18.04
+deb-ubuntu1804: build-ubuntu1804
+	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist:/dist nginx-ubuntu1804 bash -c \
+	"cp /src/*${PKG_VERSION}* /dist/"
+	docker run --rm -it nginx-ubuntu1804 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04.log
+	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04.log
+	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist/
+
+build-ubuntu1804: buildkit-logunlimited
+	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist
+	PKG_REL_DISTRIB=ubuntu18.04; \
+	(set -x; \
+	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
+	git submodule status; \
+	docker buildx build --progress plain --builder ${LOGUNLIMITED_BUILDER} --load \
+		${DOCKER_NO_CACHE} \
+		--build-arg OS_TYPE=ubuntu --build-arg OS_VERSION=18.04 \
+		--build-arg PKG_REL_DISTRIB=$${PKG_REL_DISTRIB} \
+		--build-arg PKG_VERSION=${PKG_VERSION} \
+		--build-arg LUAJIT_DEB_VERSION=${LUAJIT_DEB_VERSION} \
+		--build-arg LUAJIT_DEB_OS_ID=ubuntu1804 \
+		--build-arg MODSECURITY_DEB_VERSION=${MOSECURITY_DEB_VERSION} \
+		--build-arg MODSECURITY_DEB_OS_ID=ubuntu18.04 \
+		-t nginx-ubuntu1804 . \
+	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
+	sudo xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu18.04-dist/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+
+run-ubuntu1804:
+	docker run --rm -it nginx-ubuntu1804 bash
 
 buildkit-logunlimited:
 	if ! docker buildx inspect logunlimited 2>/dev/null; then \
