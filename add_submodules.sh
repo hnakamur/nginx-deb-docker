@@ -27,11 +27,15 @@ git submodule add https://github.com/openresty/lua-resty-upstream-healthcheck
 git submodule add https://github.com/openresty/lua-resty-websocket
 git submodule add https://github.com/cloudflare/lua-resty-cookie
 git submodule add https://github.com/zmartzone/lua-resty-openidc
-git submodule add https://github.com/bungle/lua-resty-session
 git submodule add https://github.com/cdbattags/lua-resty-jwt
 git submodule add https://github.com/jkeys089/lua-resty-hmac
 git submodule add https://github.com/hnakamur/nginx-var-limit-conn-module
 git submodule add https://github.com/hnakamur/nginx-var-limit-req-module
+
+# lua-resty-openidc requires lua-resty-session >= 2.8, <= 3.10
+# https://github.com/zmartzone/lua-resty-openidc/commit/4b9316403e1d6a162aecea86c466f50fe78232e8
+git submodule add https://github.com/bungle/lua-resty-session
+(cd lua-resty-session; git checkout v3.10)
 
 git submodule add https://github.com/pintsized/lua-resty-http
 git submodule add https://github.com/FRiCKLE/ngx_cache_purge
