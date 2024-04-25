@@ -36,7 +36,7 @@ RUN ln -s /usr/lib/softhsm/libsofthsm2.so /usr/local/lib/softhsm/libsofthsm2.so
 ARG LUAJIT_DEB_VERSION
 ARG LUAJIT_DEB_OS_ID
 RUN mkdir -p /depends
-RUN curl -sSL https://github.com/hnakamur/openresty-luajit-deb-docker/releases/download/${LUAJIT_DEB_VERSION}/dist-${LUAJIT_DEB_OS_ID}.tar.gz | tar zxf - -C /depends --strip-components=2
+RUN curl -sSL https://github.com/hnakamur/openresty-luajit-deb-docker/releases/download/${LUAJIT_DEB_VERSION}${LUAJIT_DEB_OS_ID}/openresty-luajit-${LUAJIT_DEB_VERSION}${LUAJIT_DEB_OS_ID}.tar.gz | tar zxf - -C /depends --strip-components=2
 RUN dpkg -i /depends/*.deb
 
 ARG SRC_DIR=/src
