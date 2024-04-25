@@ -44,7 +44,7 @@ RUN dpkg -i /depends/*.deb
 ARG MODSECURITY_DEB_VERSION
 ARG MODSECURITY_DEB_OS_ID
 RUN mkdir -p /depends
-RUN curl -sSL https://github.com/hnakamur/modsecurity-deb-docker/releases/download/${MODSECURITY_DEB_VERSION}${MODSECURITY_DEB_OS_ID}/modsecurity-${MODSECURITY_DEB_VERSION}${MODSECURITY_DEB_OS_ID}-dist.tar.gz | tar zxf - -C /depends --strip-components=2
+RUN curl -sSL https://github.com/hnakamur/modsecurity-deb-docker/releases/download/${MODSECURITY_DEB_VERSION}${MODSECURITY_DEB_OS_ID}/modsecurity-${MODSECURITY_DEB_VERSION}${MODSECURITY_DEB_OS_ID}.tar.gz | tar zxf - -C /depends --strip-components=2
 RUN ls -l /depends/libmodsecurity3_*.deb /depends/libmodsecurity-dev*.deb
 RUN dpkg -i /depends/libmodsecurity3_*.deb
 RUN dpkg -i /depends/libmodsecurity-dev*.deb
