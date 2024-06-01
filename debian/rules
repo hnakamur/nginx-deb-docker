@@ -52,8 +52,6 @@ config.env.%:
 	cp -Pa $(CURDIR)/set-misc-nginx-module $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/srcache-nginx-module $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/lua-resty-jump-consistent-hash $(BUILDDIR_$*)/
-	cp -Pa $(CURDIR)/nginx-var-limit-conn-module $(BUILDDIR_$*)/
-	cp -Pa $(CURDIR)/nginx-var-limit-req-module $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/ModSecurity-nginx $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/njs $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/lua-resty-openssl $(BUILDDIR_$*)/
@@ -125,8 +123,6 @@ config.status.nginx: config.env.nginx
 		--add-dynamic-module=./set-misc-nginx-module \
 		--add-dynamic-module=./srcache-nginx-module \
 		--add-dynamic-module=./njs/nginx \
-		--add-dynamic-module=./nginx-var-limit-conn-module \
-		--add-dynamic-module=./nginx-var-limit-req-module \
 		--add-dynamic-module=./ModSecurity-nginx \
 		--without-pcre2 \
 		--with-cc-opt="$(CFLAGS)" \
@@ -200,8 +196,6 @@ config.status.nginx_debug: config.env.nginx_debug
 		--add-dynamic-module=./set-misc-nginx-module \
 		--add-dynamic-module=./srcache-nginx-module \
 		--add-dynamic-module=./njs/nginx \
-		--add-dynamic-module=./nginx-var-limit-conn-module \
-		--add-dynamic-module=./nginx-var-limit-req-module \
 		--add-dynamic-module=./ModSecurity-nginx \
 		--without-pcre2 \
 		--with-cc-opt="$(CFLAGS)" \

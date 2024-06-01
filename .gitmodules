@@ -151,12 +151,6 @@
 [submodule "modules/njs"]
 	path = modules/njs
 	url = https://github.com/nginx/njs
-[submodule "modules/nginx-var-limit-conn-module"]
-	path = modules/nginx-var-limit-conn-module
-	url = https://github.com/hnakamur/nginx-var-limit-conn-module
-[submodule "modules/nginx-var-limit-req-module"]
-	path = modules/nginx-var-limit-req-module
-	url = https://github.com/hnakamur/nginx-var-limit-req-module
 [submodule "modules/ModSecurity-nginx"]
 	path = modules/ModSecurity-nginx
 	url = https://github.com/owasp-modsecurity/ModSecurity-nginx
