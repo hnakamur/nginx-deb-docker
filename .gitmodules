@@ -159,4 +159,5 @@
 	url = https://github.com/fffonion/lua-resty-openssl
 [submodule "nginx-tests"]
 	path = nginx-tests
-	url = https://github.com/nginx/nginx-tests
+	url = https://github.com/hnakamur/nginx-tests
+	branch = add_freenginx_proxy_cache_age
