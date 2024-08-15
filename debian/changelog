@@ -1,3 +1,22 @@
+nginx (1.27.1+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * nginx 1.27.1
+  * openresty luajit v2.1-20240815
+  * update modules
+  * ef64996aedd4bb5fa1831631361244813d48b82f modules/ModSecurity-nginx (v1.0.3-24-gef64996)
+  * f44c18859050be5af314bae8f05660478af5e31d modules/lua-nginx-module (v0.10.16-358-gf44c1885)
+  * fa3cd7aec1d5da30b44cb093ae6076ac6778b1e8 modules/lua-resty-core (v0.1.18-152-gfa3cd7a)
+  * 1293147608c9dfb0ee163e39a4c8997476e8f741 modules/lua-resty-lrucache (v0.10rc1-15-g1293147)
+  * a900c5f5897448c181dd58073e51cdeeb3fd0029 modules/lua-resty-openssl (0.4.0-432-ga900c5f)
+  * 737d8ccfaa59c08ad4d32a712611a856775a61c5 modules/lua-resty-signal (v0.02-15-g737d8cc)
+  * 7be2e1d907744f965af115819cca9e6580f2e760 modules/lua-resty-string (v0.12-18-g7be2e1d)
+  * 0c5ddc7d1a237336d3646c525b2e58b06b2952c4 modules/lua-resty-websocket (v0.07-32-g0c5ddc7)
+  * 07b11be7a2e6e1b75209745915a84d281737d4d7 modules/lua-upstream-nginx-module (v0.07-22-g07b11be)
+  * 4630230c3d53a28c777d9c5d07efbb1a4ebc3446 modules/njs (0.8.5-24-g4630230c)
+  * 982ce5283172fd5ac5cba21bfc55b579568a0994 modules/stream-lua-nginx-module (v0.0.8-110-g982ce52)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 15 Aug 2024 22:40:50 +0900
+
 nginx (1.27.0+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.27.0
