@@ -1,3 +1,33 @@
+nginx (1.27.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * openresty luajit v2.1-20241113
+  * update modules
+  * 4eeda3c449eaf310db66db86d230f1727e081fbe modules/echo-nginx-module (v0.62-14-g4eeda3c)
+  * f8f80997f19a41dc4181987544b9f3570cc3d6da modules/headers-more-nginx-module (v0.37-1-gf8f8099)
+  * 950b1fb2010c8847a1e0bc7f079741ec47a08f17 modules/lua-nginx-module (v0.10.16-379-g950b1fb2)
+  * af096404fbb7298f2ec1895feb65465d737b3658 modules/lua-resty-core (v0.1.18-160-gaf09640)
+  * 9450b47dc0b1ce2d92dbc522b877139e8370bec8 modules/lua-resty-dns (v0.23-2-g9450b47)
+  * 449e8b4cc1d346f29c61929e787e239014e3c6a7 modules/lua-resty-limit-traffic (v0.06-17-g449e8b4)
+  * 28444ad7eb38107272098bb83b2baff5fa57a89f modules/lua-resty-lock (v0.08-16-g28444ad)
+  * 3ff6300e68b73ba20e909c7d16bd839aef2e5a4b modules/lua-resty-lrucache (v0.10rc1-17-g3ff6300)
+  * faf7043df4ddedff37649b4d770576e070ebff03 modules/lua-resty-memcached (v0.15-19-gfaf7043)
+  * 40c917f7874654d68ae33c90a8f35874038268f4 modules/lua-resty-mysql (v0.27-3-g40c917f)
+  * 4702769443c2c39be3014bd23242e1abec02dee1 modules/lua-resty-openidc (v1.7.6-32-g4702769)
+  * 4e154c4f84fad3f4345cc58c9b1764dbb7905302 modules/lua-resty-openssl (0.4.0-433-g4e154c4)
+  * 1ad17e14fb464bf581afcd8774644738a46cb58c modules/lua-resty-redis (v0.28-26-g1ad17e1)
+  * 525de6c5a0771a6638792681e6bb2648e9c122b6 modules/lua-resty-session (v4.0.5-2-g525de6c)
+  * 41e359af0af530d833cfe0b96078f689472372d8 modules/lua-resty-signal (v0.02-17-g41e359a)
+  * c6b4348f53607044d16ec5fdc3d06fd30df487d8 modules/lua-resty-string (v0.12-20-gc6b4348)
+  * a05e91d3f0f3eead6dc589ff1253b9d8435b521b modules/lua-resty-upload (v0.11-3-ga05e91d)
+  * 7924b2abbcc3269423611e6d7aa66be28f4076f0 modules/lua-resty-upstream-healthcheck (v0.06-22-g7924b2a)
+  * 83471c3096eb8e2311deb398f60a2f46c3dfdcab modules/lua-resty-websocket (v0.07-34-g83471c3)
+  * 5247aac9f4cc6f49ccf4a1dcfb30581ae2837dd4 modules/njs (0.8.6-39-g5247aac9)
+  * eb223c91049ee3fed446660090a1ac3b242c5b7c modules/set-misc-nginx-module (v0.33-8-geb223c9)
+  * 37fe98355461d2f03d73e6a8e82ac4e4cd85d711 nginx (release-1.26.2)
+  * d917607383c0456c1b91b280c68fa04ed0f70396 nginx-tests (heads/add_freenginx_proxy_cache_age)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 14 Nov 2024 23:29:17 +0900
+
 nginx (1.27.2+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.27.2
