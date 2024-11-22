@@ -16,7 +16,8 @@ Build-Depends: debhelper (>= 9~),
                libgeoip-dev,
                libmhash-dev,
                libmaxminddb-dev,
-               libperl-dev
+               libperl-dev,
+               rake
 Standards-Version: 3.9.8.0
 Homepage: http://nginx.org
 
