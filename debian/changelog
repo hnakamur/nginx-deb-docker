@@ -1,3 +1,10 @@
+nginx (1.26.2+mod.3-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * add module
+  * bed251036c0f273fb42fa9e84c00767b15983956 modules/ngx_mruby (v1.18.6-938-gbed2510)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 22 Nov 2024 21:33:06 +0900
+
 nginx (1.26.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * openresty luajit v2.1-20241113

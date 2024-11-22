@@ -27,7 +27,8 @@ RUN apt-get update && \
     libengine-pkcs11-openssl \
     opensc \
     uwsgi \
-    uwsgi-plugin-python3
+    uwsgi-plugin-python3 \
+    rake
 
 # create symbolic links for nginx-tests
 RUN mkdir -p /usr/local/lib/engines
