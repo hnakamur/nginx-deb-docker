@@ -4,7 +4,7 @@ ifdef NO_CACHE
 DOCKER_NO_CACHE=--no-cache
 endif
 LUAJIT_DEB_VERSION=2.1.20241113-1hn1
-MOSECURITY_DEB_VERSION=3.0.12-2hn1
+MODSECURITY_DEB_VERSION=3.0.12-2hn1
 
 LOGUNLIMITED_BUILDER=logunlimited
 
@@ -29,7 +29,7 @@ build-ubuntu2404: buildkit-logunlimited
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg LUAJIT_DEB_VERSION=${LUAJIT_DEB_VERSION} \
 		--build-arg LUAJIT_DEB_OS_ID=ubuntu24.04 \
-		--build-arg MODSECURITY_DEB_VERSION=${MOSECURITY_DEB_VERSION} \
+		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
 		--build-arg MODSECURITY_DEB_OS_ID=ubuntu24.04 \
 		-t nginx-ubuntu2404 . \
 	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
@@ -59,7 +59,7 @@ build-ubuntu2204: buildkit-logunlimited
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg LUAJIT_DEB_VERSION=${LUAJIT_DEB_VERSION} \
 		--build-arg LUAJIT_DEB_OS_ID=ubuntu22.04 \
-		--build-arg MODSECURITY_DEB_VERSION=${MOSECURITY_DEB_VERSION} \
+		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
 		--build-arg MODSECURITY_DEB_OS_ID=ubuntu22.04 \
 		-t nginx-ubuntu2204 . \
 	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
@@ -89,7 +89,7 @@ build-debian12: buildkit-logunlimited
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg LUAJIT_DEB_VERSION=${LUAJIT_DEB_VERSION} \
 		--build-arg LUAJIT_DEB_OS_ID=debian12 \
-		--build-arg MODSECURITY_DEB_VERSION=${MOSECURITY_DEB_VERSION} \
+		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
 		--build-arg MODSECURITY_DEB_OS_ID=debian12 \
 		-t nginx-debian12 . \
 	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
