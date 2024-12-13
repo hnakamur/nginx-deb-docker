@@ -30,8 +30,6 @@ git submodule add https://github.com/zmartzone/lua-resty-openidc
 git submodule add https://github.com/bungle/lua-resty-session
 git submodule add https://github.com/cdbattags/lua-resty-jwt
 git submodule add https://github.com/jkeys089/lua-resty-hmac
-git submodule add https://github.com/hnakamur/nginx-var-limit-conn-module
-git submodule add https://github.com/hnakamur/nginx-var-limit-req-module
 
 git submodule add https://github.com/pintsized/lua-resty-http
 git submodule add https://github.com/FRiCKLE/ngx_cache_purge
@@ -49,9 +47,9 @@ git submodule add https://github.com/hamishforbes/lua-ffi-zlib
 git submodule add https://github.com/Phrogz/SLAXML
 git submodule add https://github.com/leev/ngx_http_geoip2_module
 git submodule add https://github.com/e98cuenc/ngx_upstream_jdomain
-git submodule add https://github.com/google/nginx-sxg-module
 git submodule add https://github.com/woothee/lua-resty-woothee
 git submodule add https://github.com/ruoshan/lua-resty-jump-consistent-hash
 git submodule add https://github.com/nginx/njs
 git submodule add https://github.com/owasp-modsecurity/ModSecurity-nginx
 git submodule add https://github.com/fffonion/lua-resty-openssl
+git submodule add https://github.com/matsumotory/ngx_mruby
