@@ -164,3 +164,6 @@
 [submodule "modules/ngx_mruby"]
 	path = modules/ngx_mruby
 	url = https://github.com/matsumotory/ngx_mruby
+[submodule "modules/nginx-otel"]
+	path = modules/nginx-otel
+	url = https://github.com/nginxinc/nginx-otel
