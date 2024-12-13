@@ -28,7 +28,9 @@ RUN apt-get update && \
     opensc \
     uwsgi \
     uwsgi-plugin-python3 \
-    rake
+    rake \
+    # for nginx-otel module
+    git cmake libpcre3-dev pkg-config libc-ares-dev libre2-dev
 
 # create symbolic links for nginx-tests
 RUN mkdir -p /usr/local/lib/engines

@@ -1,3 +1,10 @@
+nginx (1.27.3+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add NGINX Native OpenTelemetry (OTel) Module
+  * 6c1659a20ba946cdde21e9dbc52e7c740b06d968 modules/nginx-otel (v0.1.1-18-g6c1659a)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 13 Dec 2024 21:24:26 +0900
+
 nginx (1.27.3+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.27.3

@@ -17,7 +17,13 @@ Build-Depends: debhelper (>= 9~),
                libmhash-dev,
                libmaxminddb-dev,
                libperl-dev,
-               rake
+               rake,
+               git,
+               cmake,
+               libpcre3-dev,
+               pkg-config,
+               libc-ares-dev,
+               libre2-dev
 Standards-Version: 3.9.8.0
 Homepage: http://nginx.org
 
