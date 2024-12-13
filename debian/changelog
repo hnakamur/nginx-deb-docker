@@ -2,6 +2,13 @@ nginx (1.26.2+mod.4-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add NGINX Native OpenTelemetry (OTel) Module
   * 6c1659a20ba946cdde21e9dbc52e7c740b06d968 modules/nginx-otel (v0.1.1-18-g6c1659a)
+  * Update modules
+  * 1dd84ae5f7c5f5421be7ce5fb155d249238fed58 modules/lua-resty-openssl (0.4.0-438-g1dd84ae)
+  * 4a97ba248100e956188308dbd909e00189fbd947 modules/lua-resty-shdict-simple (v0.01rc5-2-g4a97ba2)
+  * 0aeafc24fbf607685d2a4d7c3ee9d0b83a092d8c modules/lua-resty-shell (v0.03-9-g0aeafc2)
+  * 629ae1f6f2f84b20d686dce2e9cd730b4edbe93e modules/nginx-http-shibboleth (v20150121-153-g629ae1f)
+  * 78e3edf7505cd04a5df0b7936bcd2d89e95bdda8 modules/njs (0.8.6-46-g78e3edf7)
+  * b22705c041db0d1f4b131136928469f035336327 modules/stream-lua-nginx-module (v0.0.8-115-gb22705c)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 14 Dec 2024 03:10:59 +0900
 
