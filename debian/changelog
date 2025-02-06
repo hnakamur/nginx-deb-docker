@@ -1,3 +1,21 @@
+nginx (1.26.3+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * 1.26.3
+  * OpenResty LuaJIT 2.1-20250117
+  * ModSecurity 3.0.13
+  * Update modules
+  * fb678c5b4456c733e011d4bd6ad0888baca8c124 modules/ModSecurity-nginx (v1.0.3-27-gfb678c5)
+  * 84a65d68687c9de5166fd49ddbbd68c6962234eb modules/headers-more-nginx-module (v0.38)
+  * 5bd471a4bce6c02dd68b1ca72fbabb09fb2041d8 modules/lua-nginx-module (v0.10.16-380-g5bd471a4)
+  * cb7264da6d94c259c4ad01ee5c61b5f65e3c7eb4 modules/lua-resty-core (v0.1.18-162-gcb7264d)
+  * e901ea8c98f6e159482611952891d3418ab893e0 modules/lua-resty-openssl (0.4.0-443-ge901ea8)
+  * 72d8eed53af4c2cd6f3e30a2efe0e38d66f5e176 modules/nginx-otel (v0.1.1-28-g72d8eed)
+  * 6c7719d0ba32e00b563ec70bd43dad11960fa9c4 modules/nginx-rtmp-module (v1.2.2-4-g6c7719d)
+  * 2d97e80486d7d2554e58cdaca4f2389b836600c8 modules/njs (0.8.6-70-g2d97e804)
+  * 4169f1ba16860e30403372693a85171bebf1994d modules/stream-lua-nginx-module (v0.0.8-117-g4169f1b)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 06 Feb 2025 09:37:11 +0900
+
 nginx (1.26.2+mod.4-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add NGINX Native OpenTelemetry (OTel) Module
