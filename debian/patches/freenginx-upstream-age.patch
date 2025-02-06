@@ -62,7 +62,7 @@ cache validity time.
      { ngx_null_string, 0 }
  };
  
-@@ -4924,13 +4938,14 @@
+@@ -4925,13 +4939,14 @@
              return NGX_OK;
          }
  
@@ -79,7 +79,7 @@ cache validity time.
      }
  
  extensions:
-@@ -5094,6 +5109,7 @@
+@@ -5095,6 +5110,7 @@
              r->cache->valid_sec = ngx_time() + n;
              u->headers_in.no_cache = 0;
              u->headers_in.expired = 0;
@@ -87,7 +87,7 @@ cache validity time.
              return NGX_OK;
          }
      }
-@@ -5107,6 +5123,7 @@
+@@ -5108,6 +5124,7 @@
          r->cache->valid_sec = n;
          u->headers_in.no_cache = 0;
          u->headers_in.expired = 0;
@@ -95,7 +95,7 @@ cache validity time.
      }
      }
  #endif
-@@ -5358,6 +5375,61 @@
+@@ -5359,6 +5376,61 @@
  
  
  static ngx_int_t
@@ -157,7 +157,7 @@ cache validity time.
  ngx_http_upstream_copy_header_line(ngx_http_request_t *r, ngx_table_elt_t *h,
      ngx_uint_t offset)
  {
-@@ -6087,6 +6159,60 @@
+@@ -6088,6 +6160,60 @@
  
      return NGX_OK;
  }
@@ -228,7 +228,7 @@ cache validity time.
  
  
  typedef struct {
-@@ -295,14 +296,17 @@
+@@ -296,14 +297,17 @@
  
      ngx_table_elt_t                 *cache_control;
      ngx_table_elt_t                 *set_cookie;
