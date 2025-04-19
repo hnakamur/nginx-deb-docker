@@ -1,3 +1,27 @@
+nginx (1.27.5+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * 1.27.5 
+  * ModSecurity 3.0.14-1hn1
+  * Update modules
+  * 7d516d1634d0d8a926b787964b7a803a0bb49501 modules/ModSecurity-nginx (v1.0.3-34-g7d516d1)
+  * bdba93c3543a083f737c20fc067f4ad539d1942a modules/lua-nginx-module (v0.10.16-388-gbdba93c3)
+  * eac2a10ff9a2c0196ce7240fe9ac67ad140cbceb modules/lua-resty-core (v0.1.18-166-geac2a10)
+  * 8141d51ebabf51ec3a5c52733fc0e19c3e3aee2e modules/lua-resty-dns (v0.23-3-g8141d51)
+  * 26a3fb430b6cccccaebc95da607a32caaa1c86f5 modules/lua-resty-limit-traffic (v0.06-18-g26a3fb4)
+  * f0acb73d9f5285ce42699e9a200c5a6faa001533 modules/lua-resty-mysql (v0.27-4-gf0acb73)
+  * fabf64e29062f5e7658de1cee52f572221203b1e modules/lua-resty-openidc (v1.7.6-40-gfabf64e)
+  * e0f52762fef5c31532e60c7d58c7a6d9ae5a6905 modules/lua-resty-openssl (0.4.0-453-ge0f5276)
+  * 77b46a4e5696217124019b31a5afe1420edcedf2 modules/lua-resty-redis (v0.28-29-g77b46a4)
+  * e4ee19ab9788293ee868f01e56a5303387cf7d04 modules/lua-resty-session (v4.1.1)
+  * 54005878971567ef733f27b8b6b26ed0f85a1228 modules/lua-resty-websocket (v0.07-35-g5400587)
+  * b84260df7cdc12375e2bcd14421bcecc64637aa1 modules/memc-nginx-module (v0.20-1-gb84260d)
+  * 22d6380458c115b75ec7ed7d759bb47231f3d1f6 modules/nginx-otel (v0.1.2-1-g22d6380)
+  * bd44d16302273052d6005d7bdb55f74e23813de3 modules/ngx_devel_kit (v0.3.2-5-gbd44d16)
+  * dbf556f235af1f42a7d9e3b90682de090170cd0f modules/njs (0.8.6-119-gdbf556f2)
+  * 9c205ed0f3f0033e94879ef1fd98f950ca896440 modules/stream-lua-nginx-module (v0.0.8-120-g9c205ed)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 19 Apr 2025 17:00:55 +0900
+
 nginx (1.27.4+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * 1.27.4

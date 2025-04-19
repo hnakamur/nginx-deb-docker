@@ -22,7 +22,7 @@
  #endif
  
      { ngx_string("proxy_temp_path"),
-@@ -5429,3 +5437,103 @@
+@@ -5427,3 +5435,103 @@
  
      v->uri = u->uri;
  }
