@@ -1,6 +1,12 @@
+nginx (1.29.0+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * 1.29.0
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 25 Jun 2025 18:53:21 +0900
+
 nginx (1.27.5+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
-  * 1.27.5 
+  * 1.27.5
   * ModSecurity 3.0.14-1hn1
   * Update modules
   * 7d516d1634d0d8a926b787964b7a803a0bb49501 modules/ModSecurity-nginx (v1.0.3-34-g7d516d1)
