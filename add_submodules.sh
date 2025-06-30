@@ -46,7 +46,6 @@ git submodule add https://github.com/hnakamur/nginx-lua-session
 git submodule add https://github.com/hamishforbes/lua-ffi-zlib
 git submodule add https://github.com/Phrogz/SLAXML
 git submodule add https://github.com/leev/ngx_http_geoip2_module
-git submodule add https://github.com/e98cuenc/ngx_upstream_jdomain
 git submodule add https://github.com/woothee/lua-resty-woothee
 git submodule add https://github.com/ruoshan/lua-resty-jump-consistent-hash
 git submodule add https://github.com/nginx/njs
