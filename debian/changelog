@@ -1,3 +1,9 @@
+nginx (1.28.0+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Remove e98cuenc/ngx_upstream_jdomain module 
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Mon, 30 Jun 2025 14:22:22 +0900
+
 nginx (1.28.0+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * 1.28.0

@@ -139,9 +139,6 @@
 [submodule "modules/ngx_http_geoip2_module"]
 	path = modules/ngx_http_geoip2_module
 	url = https://github.com/leev/ngx_http_geoip2_module
-[submodule "modules/ngx_upstream_jdomain"]
-	path = modules/ngx_upstream_jdomain
-	url = https://github.com/e98cuenc/ngx_upstream_jdomain
 [submodule "modules/lua-resty-woothee"]
 	path = modules/lua-resty-woothee
 	url = https://github.com/woothee/lua-resty-woothee
