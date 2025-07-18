@@ -1,3 +1,9 @@
+nginx (1.28.0+mod.3-2hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Move some libraries from Depends to Recommends and Suggests
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 19 Jul 2025 07:12:31 +0900
+
 nginx (1.28.0+mod.3-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add naxsi as a dynamic module

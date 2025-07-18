@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $line = <STDIN>;
+chomp $line;
+$line =~ s/^shlibs:Depends=//;
+
+my @depends = ();
+my @recommends = ();
+my @suggests = ();
+my @fields = split /, /, $line;
+foreach my $field (@fields) {
+  if ($field =~ /^(libc6 |libcrypt1 |libpcre3$|libssl3(t64)? |zlib1g )/) {
+    push @depends, $field;
+  } elsif ($field =~ /^libluajit-5.1-2 /) {
+    push @recommends, $field;
+  } else {
+    push @suggests, $field;
+  }
+}
+my $depends = join(", ", @depends);
+my $recommends = join(", ", @recommends);
+my $suggests = join(", ", @suggests);
+print "shlibs:Depends=$depends\nshlibs:Recommends=$recommends\nshlibs:Suggests=$suggests\n";
