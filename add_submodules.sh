@@ -53,3 +53,7 @@ git submodule add https://github.com/owasp-modsecurity/ModSecurity-nginx
 git submodule add https://github.com/fffonion/lua-resty-openssl
 git submodule add https://github.com/matsumotory/ngx_mruby
 git submodule add https://github.com/nginxinc/nginx-otel
+
+git submodule add https://github.com/wargio/naxsi
+(cd naxsi && git checkout 1.7)
+git submodule update --init --recursive naxsi
