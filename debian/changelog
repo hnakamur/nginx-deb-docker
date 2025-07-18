@@ -1,4 +1,11 @@
-nginx (1.29.0+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+nginx (1.29.0+mod.3-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add naxsi as a dynamic module
+  * 7a6df55edfe7ee190f2490cc1ca3ff1cf851d0e5 modules/naxsi (1.0-190-g7a6df55)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 19 Jul 2025 06:26:13 +0900
+
+nginx (1.28.0+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Remove e98cuenc/ngx_upstream_jdomain module
 

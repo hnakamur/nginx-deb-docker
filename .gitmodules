@@ -164,3 +164,6 @@
 [submodule "modules/nginx-otel"]
 	path = modules/nginx-otel
 	url = https://github.com/nginxinc/nginx-otel
+[submodule "modules/naxsi"]
+	path = modules/naxsi
+	url = https://github.com/wargio/naxsi
