@@ -301,6 +301,8 @@ binary-arch: install build-dbg
 	dh_fixperms -a
 	dh_installdeb -a
 	dh_shlibdeps -a
+	mv debian/nginx.substvars debian/nginx.substvars.orig
+	debian/modify-substvars < debian/nginx.substvars.orig > debian/nginx.substvars
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb $(foreach p,$(DO_PKGS),-p$(p))
