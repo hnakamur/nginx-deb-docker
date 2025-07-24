@@ -167,3 +167,7 @@
 [submodule "modules/naxsi"]
 	path = modules/naxsi
 	url = https://github.com/wargio/naxsi
+[submodule "modules/nginx-limit-upstream"]
+	path = modules/nginx-limit-upstream
+	url = https://github.com/hnakamur/nginx-limit-upstream
+	branch = support_dynamic_module

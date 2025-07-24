@@ -1,0 +1,108 @@
+diff --git a/src/core/ngx_core.h b/src/core/ngx_core.h
+index 02890b843..8b811cc9a 100644
+--- a/src/core/ngx_core.h
++++ b/src/core/ngx_core.h
+@@ -43,6 +43,7 @@ typedef void (*ngx_connection_handler_pt)(ngx_connection_t *c);
+ #define  NGX_DONE       -4
+ #define  NGX_DECLINED   -5
+ #define  NGX_ABORT      -6
++#define  NGX_BLOCK      -7
+ 
+ 
+ #include <ngx_errno.h>
+diff --git a/src/http/ngx_http_upstream.c b/src/http/ngx_http_upstream.c
+index d4cf1b7fe..b0806e531 100644
+--- a/src/http/ngx_http_upstream.c
++++ b/src/http/ngx_http_upstream.c
+@@ -35,8 +35,6 @@ static void ngx_http_upstream_rd_check_broken_connection(ngx_http_request_t *r);
+ static void ngx_http_upstream_wr_check_broken_connection(ngx_http_request_t *r);
+ static void ngx_http_upstream_check_broken_connection(ngx_http_request_t *r,
+     ngx_event_t *ev);
+-static void ngx_http_upstream_connect(ngx_http_request_t *r,
+-    ngx_http_upstream_t *u);
+ static ngx_int_t ngx_http_upstream_reinit(ngx_http_request_t *r,
+     ngx_http_upstream_t *u);
+ static void ngx_http_upstream_send_request(ngx_http_request_t *r,
+@@ -1546,39 +1544,45 @@ ngx_http_upstream_check_broken_connection(ngx_http_request_t *r,
+ }
+ 
+ 
+-static void
++void
+ ngx_http_upstream_connect(ngx_http_request_t *r, ngx_http_upstream_t *u)
+ {
+     ngx_int_t                  rc;
+     ngx_connection_t          *c;
+     ngx_http_core_loc_conf_t  *clcf;
+ 
+-    r->connection->log->action = "connecting to upstream";
++    if (!u->blocked) {
++        r->connection->log->action = "connecting to upstream";
+ 
+-    if (u->state && u->state->response_time == (ngx_msec_t) -1) {
+-        u->state->response_time = ngx_current_msec - u->start_time;
+-    }
++        if (u->state && u->state->response_time == (ngx_msec_t) -1) {
++            u->state->response_time = ngx_current_msec - u->start_time;
++        }
+ 
+-    u->state = ngx_array_push(r->upstream_states);
+-    if (u->state == NULL) {
+-        ngx_http_upstream_finalize_request(r, u,
+-                                           NGX_HTTP_INTERNAL_SERVER_ERROR);
+-        return;
+-    }
++        u->state = ngx_array_push(r->upstream_states);
++        if (u->state == NULL) {
++            ngx_http_upstream_finalize_request(r, u,
++                                               NGX_HTTP_INTERNAL_SERVER_ERROR);
++            return;
++        }
+ 
+-    ngx_memzero(u->state, sizeof(ngx_http_upstream_state_t));
++        ngx_memzero(u->state, sizeof(ngx_http_upstream_state_t));
+ 
+-    u->start_time = ngx_current_msec;
++        u->start_time = ngx_current_msec;
+ 
+-    u->state->response_time = (ngx_msec_t) -1;
+-    u->state->connect_time = (ngx_msec_t) -1;
+-    u->state->header_time = (ngx_msec_t) -1;
++        u->state->response_time = (ngx_msec_t) -1;
++        u->state->connect_time = (ngx_msec_t) -1;
++        u->state->header_time = (ngx_msec_t) -1;
++    }
+ 
+     rc = ngx_event_connect_peer(&u->peer);
+ 
+     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
+                    "http upstream connect: %i", rc);
+ 
++    if (rc == NGX_BLOCK) {
++        return;
++    }
++
+     if (rc == NGX_ERROR) {
+         ngx_http_upstream_finalize_request(r, u,
+                                            NGX_HTTP_INTERNAL_SERVER_ERROR);
+diff --git a/src/http/ngx_http_upstream.h b/src/http/ngx_http_upstream.h
+index e0a903669..7abc51f44 100644
+--- a/src/http/ngx_http_upstream.h
++++ b/src/http/ngx_http_upstream.h
+@@ -408,6 +408,7 @@ struct ngx_http_upstream_s {
+     unsigned                         request_body_sent:1;
+     unsigned                         request_body_blocked:1;
+     unsigned                         header_sent:1;
++    unsigned                         blocked:1;
+ };
+ 
+ 
+@@ -441,6 +442,8 @@ ngx_int_t ngx_http_upstream_hide_headers_hash(ngx_conf_t *cf,
+ ngx_int_t ngx_http_upstream_merge_ssl_passwords(ngx_conf_t *cf,
+     ngx_http_upstream_conf_t *conf, ngx_http_upstream_conf_t *prev);
+ #endif
++void ngx_http_upstream_connect(ngx_http_request_t *r,
++    ngx_http_upstream_t *u);
+ 
+ 
+ #define ngx_http_conf_upstream_srv_conf(uscf, module)                         \

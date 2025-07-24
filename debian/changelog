@@ -1,3 +1,10 @@
+nginx (1.28.0+mod.4-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add nginx-limit-upstream as dynamic modules
+  * 16de65e82ba5f82141c04ef0efd7fa034b9bbc25 modules/nginx-limit-upstream (1.0.0-43-g16de65e)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 25 Jul 2025 04:55:39 +0900
+
 nginx (1.28.0+mod.3-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Move some libraries from Depends to Recommends and Suggests
