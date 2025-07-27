@@ -1,0 +1,30 @@
+From a1d14edfa58f72a42f2bb86b770a4e6748966535 Mon Sep 17 00:00:00 2001
+From: Hiroaki Nakamura <hnakamur@gmail.com>
+Date: Sun, 27 Jul 2025 16:57:00 +0900
+Subject: [PATCH 2/2] Add limit_upstream_status field in stream structure
+
+---
+ src/stream/ngx_stream.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/stream/ngx_stream.h b/src/stream/ngx_stream.h
+index dc05dc5ba..f4235910c 100644
+--- a/src/stream/ngx_stream.h
++++ b/src/stream/ngx_stream.h
+@@ -295,6 +295,13 @@ struct ngx_stream_session_s {
+     unsigned                       health_check:1;
+ 
+     unsigned                       limit_conn_status:2;
++
++    /*
++     * instead of using the context data in
++     * ngx_stream_limit_upstream_module
++     * we use the bit fields in the stream structure
++     */
++    unsigned                       limit_upstream_status:3;
+ };
+ 
+ 
+-- 
+2.43.0
+

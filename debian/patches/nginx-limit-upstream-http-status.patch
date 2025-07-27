@@ -1,0 +1,25 @@
+From 5b686560a5422278bb12d30c21a420d4b574c303 Mon Sep 17 00:00:00 2001
+From: Hiroaki Nakamura <hnakamur@gmail.com>
+Date: Sun, 27 Jul 2025 16:56:39 +0900
+Subject: [PATCH 1/2] Add limit_upstream_status field in http request structure
+
+---
+ src/http/ngx_http_request.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+--- a/src/http/ngx_http_request.h
++++ b/src/http/ngx_http_request.h
+@@ -572,6 +572,13 @@
+     unsigned                          background:1;
+     unsigned                          health_check:1;
+ 
++    /*
++     * instead of using the context data in
++     * ngx_http_limit_upstream_module
++     * we use the bit fields in the request structure
++     */
++    unsigned                          limit_upstream_status:3;
++
+     /* used to parse HTTP headers */
+ 
+     ngx_uint_t                        state;

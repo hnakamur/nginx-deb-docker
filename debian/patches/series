@@ -10,3 +10,5 @@ nginx_ltsv_http_log.patch
 freenginx-upstream-age.patch
 nginx-limit-upstream-http.patch
 nginx-limit-upstream-stream.patch
+nginx-limit-upstream-http-status.patch
+nginx-limit-upstream-stream-status.patch

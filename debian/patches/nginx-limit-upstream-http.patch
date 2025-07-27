@@ -1,8 +1,6 @@
-diff --git a/src/core/ngx_core.h b/src/core/ngx_core.h
-index 02890b843..8b811cc9a 100644
 --- a/src/core/ngx_core.h
 +++ b/src/core/ngx_core.h
-@@ -43,6 +43,7 @@ typedef void (*ngx_connection_handler_pt)(ngx_connection_t *c);
+@@ -43,6 +43,7 @@
  #define  NGX_DONE       -4
  #define  NGX_DECLINED   -5
  #define  NGX_ABORT      -6
@@ -10,11 +8,9 @@ index 02890b843..8b811cc9a 100644
  
  
  #include <ngx_errno.h>
-diff --git a/src/http/ngx_http_upstream.c b/src/http/ngx_http_upstream.c
-index d4cf1b7fe..b0806e531 100644
 --- a/src/http/ngx_http_upstream.c
 +++ b/src/http/ngx_http_upstream.c
-@@ -35,8 +35,6 @@ static void ngx_http_upstream_rd_check_broken_connection(ngx_http_request_t *r);
+@@ -37,8 +37,6 @@
  static void ngx_http_upstream_wr_check_broken_connection(ngx_http_request_t *r);
  static void ngx_http_upstream_check_broken_connection(ngx_http_request_t *r,
      ngx_event_t *ev);
@@ -23,7 +19,7 @@ index d4cf1b7fe..b0806e531 100644
  static ngx_int_t ngx_http_upstream_reinit(ngx_http_request_t *r,
      ngx_http_upstream_t *u);
  static void ngx_http_upstream_send_request(ngx_http_request_t *r,
-@@ -1546,39 +1544,45 @@ ngx_http_upstream_check_broken_connection(ngx_http_request_t *r,
+@@ -1560,39 +1558,45 @@
  }
  
  
@@ -85,11 +81,9 @@ index d4cf1b7fe..b0806e531 100644
      if (rc == NGX_ERROR) {
          ngx_http_upstream_finalize_request(r, u,
                                             NGX_HTTP_INTERNAL_SERVER_ERROR);
-diff --git a/src/http/ngx_http_upstream.h b/src/http/ngx_http_upstream.h
-index e0a903669..7abc51f44 100644
 --- a/src/http/ngx_http_upstream.h
 +++ b/src/http/ngx_http_upstream.h
-@@ -408,6 +408,7 @@ struct ngx_http_upstream_s {
+@@ -412,6 +412,7 @@
      unsigned                         request_body_sent:1;
      unsigned                         request_body_blocked:1;
      unsigned                         header_sent:1;
@@ -97,7 +91,7 @@ index e0a903669..7abc51f44 100644
  };
  
  
-@@ -441,6 +442,8 @@ ngx_int_t ngx_http_upstream_hide_headers_hash(ngx_conf_t *cf,
+@@ -445,6 +446,8 @@
  ngx_int_t ngx_http_upstream_merge_ssl_passwords(ngx_conf_t *cf,
      ngx_http_upstream_conf_t *conf, ngx_http_upstream_conf_t *prev);
  #endif
