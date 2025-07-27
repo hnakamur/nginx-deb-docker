@@ -1,7 +1,9 @@
 # syntax=docker/dockerfile:1
+
+# setup_build stage
 ARG OS_TYPE=ubuntu
 ARG OS_VERSION=22.04
-FROM ${OS_TYPE}:${OS_VERSION}
+FROM ${OS_TYPE}:${OS_VERSION} AS setup_build
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata apt-utils \
@@ -56,6 +58,9 @@ ARG SRC_DIR=/src
 ARG BUILD_USER=nginx
 RUN adduser --system --group ${BUILD_USER}
 
+# build_nginx stage
+FROM setup_build AS build_nginx
+
 COPY --chown=${BUILD_USER}:${BUILD_USER} ./nginx/ ${SRC_DIR}/nginx/
 COPY --chown=${BUILD_USER}:${BUILD_USER} ./modules/ ${SRC_DIR}/nginx/
 
@@ -69,6 +74,9 @@ WORKDIR ${SRC_DIR}/nginx
 ARG PKG_REL_DISTRIB
 RUN sed -i "s/DebRelDistrib/${PKG_REL_DISTRIB}/;s/UNRELEASED/$(lsb_release -cs)/" ${SRC_DIR}/nginx/debian/changelog
 RUN dpkg-buildpackage -us -uc
+
+# test_nginx stage
+FROM build_nginx AS test_nginx
 
 COPY --chown=${BUILD_USER}:${BUILD_USER} ./nginx-tests/ ${SRC_DIR}/nginx-tests/
 COPY --chown=${BUILD_USER}:${BUILD_USER} ./run-nginx-tests.sh ${SRC_DIR}/run-nginx-tests.sh
