@@ -1,3 +1,9 @@
+nginx (1.29.1+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * 1.29.1
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 16 Aug 2025 19:49:35 +0900
+
 nginx (1.29.0+mod.3-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Move some libraries from Depends to Recommends and Suggests
