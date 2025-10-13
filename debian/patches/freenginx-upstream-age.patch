@@ -1,19 +1,62 @@
-From cc71639841da38e55f4a13fd301187fd2c3a0e19 Mon Sep 17 00:00:00 2001
-From: Maxim Dounin <mdounin@mdounin.ru>
-Date: Thu, 18 Jul 2024 19:39:39 +0300
-Subject: [PATCH 1/2] Upstream: using the "Age" header when caching responses.
+From 5805b5a3268cc8b735159fe6c840ee2a4186e2c2 Mon Sep 17 00:00:00 2001
+From: Hiroaki Nakamura <hnakamur@gmail.com>
+Date: Mon, 13 Oct 2025 10:15:21 +0900
+Subject: [PATCH] Upstream: using the "Age" header when caching responses
 
 As long as the "Age" header is present and not ignored, it is now
 respected when caching responses per "Cache-Control: max-age", reducing
 cache validity time.
 ---
- src/http/ngx_http_upstream.c | 69 ++++++++++++++++++++++++++++++++++--
- src/http/ngx_http_upstream.h |  4 +++
- 2 files changed, 71 insertions(+), 2 deletions(-)
+ .../modules/ngx_http_headers_filter_module.c  |   9 ++
+ src/http/ngx_http_request.h                   |   1 +
+ src/http/ngx_http_upstream.c                  | 130 +++++++++++++++++-
+ src/http/ngx_http_upstream.h                  |   4 +
+ 4 files changed, 142 insertions(+), 2 deletions(-)
 
+diff --git a/src/http/modules/ngx_http_headers_filter_module.c b/src/http/modules/ngx_http_headers_filter_module.c
+index 90e6da8b3..c9fc09520 100644
+--- a/src/http/modules/ngx_http_headers_filter_module.c
++++ b/src/http/modules/ngx_http_headers_filter_module.c
+@@ -93,6 +93,10 @@ static ngx_http_set_header_t  ngx_http_set_headers[] = {
+                  offsetof(ngx_http_headers_out_t, etag),
+                  ngx_http_set_response_header },
+ 
++    { ngx_string("Age"),
++                 offsetof(ngx_http_headers_out_t, age),
++                 ngx_http_set_response_header },
++
+     { ngx_null_string, 0, NULL }
+ };
+ 
+@@ -352,6 +356,11 @@ ngx_http_set_expires(ngx_http_request_t *r, ngx_http_headers_conf_t *conf)
+         }
+     }
+ 
++    if (r->headers_out.age) {
++        r->headers_out.age->hash = 0;
++        r->headers_out.age = NULL;
++    }
++
+     e = r->headers_out.expires;
+ 
+     if (e == NULL) {
+diff --git a/src/http/ngx_http_request.h b/src/http/ngx_http_request.h
+index ad11f147f..189dafb48 100644
+--- a/src/http/ngx_http_request.h
++++ b/src/http/ngx_http_request.h
+@@ -278,6 +278,7 @@ typedef struct {
+ 
+     ngx_table_elt_t                  *cache_control;
+     ngx_table_elt_t                  *link;
++    ngx_table_elt_t                  *age;
+ 
+     ngx_str_t                        *override_charset;
+ 
+diff --git a/src/http/ngx_http_upstream.c b/src/http/ngx_http_upstream.c
+index 07e51a966..aa4c4efbb 100644
 --- a/src/http/ngx_http_upstream.c
 +++ b/src/http/ngx_http_upstream.c
-@@ -27,6 +27,8 @@
+@@ -27,6 +27,8 @@ static ngx_int_t ngx_http_upstream_cache_last_modified(ngx_http_request_t *r,
      ngx_http_variable_value_t *v, uintptr_t data);
  static ngx_int_t ngx_http_upstream_cache_etag(ngx_http_request_t *r,
      ngx_http_variable_value_t *v, uintptr_t data);
@@ -22,7 +65,7 @@ cache validity time.
  #endif
  
  static void ngx_http_upstream_init_request(ngx_http_request_t *r);
-@@ -135,6 +137,8 @@
+@@ -139,6 +141,8 @@ static ngx_int_t
      ngx_table_elt_t *h, ngx_uint_t offset);
  static ngx_int_t ngx_http_upstream_process_vary(ngx_http_request_t *r,
      ngx_table_elt_t *h, ngx_uint_t offset);
@@ -31,7 +74,7 @@ cache validity time.
  static ngx_int_t ngx_http_upstream_copy_header_line(ngx_http_request_t *r,
      ngx_table_elt_t *h, ngx_uint_t offset);
  static ngx_int_t
-@@ -296,6 +300,11 @@
+@@ -300,6 +304,11 @@ static ngx_http_upstream_header_t  ngx_http_upstream_headers_in[] = {
                   ngx_http_upstream_copy_multi_header_lines,
                   offsetof(ngx_http_headers_out_t, link), 0 },
  
@@ -43,7 +86,7 @@ cache validity time.
      { ngx_string("X-Accel-Expires"),
                   ngx_http_upstream_process_accel_expires, 0,
                   ngx_http_upstream_copy_header_line, 0, 0 },
-@@ -447,6 +456,10 @@
+@@ -451,6 +460,10 @@ static ngx_http_variable_t  ngx_http_upstream_vars[] = {
        ngx_http_upstream_cache_etag, 0,
        NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH, 0 },
  
@@ -54,7 +97,7 @@ cache validity time.
  #endif
  
      { ngx_string("upstream_http_"), NULL, ngx_http_upstream_header_variable,
-@@ -492,6 +505,7 @@
+@@ -496,6 +509,7 @@ ngx_conf_bitmask_t  ngx_http_upstream_ignore_headers_masks[] = {
      { ngx_string("Cache-Control"), NGX_HTTP_UPSTREAM_IGN_CACHE_CONTROL },
      { ngx_string("Set-Cookie"), NGX_HTTP_UPSTREAM_IGN_SET_COOKIE },
      { ngx_string("Vary"), NGX_HTTP_UPSTREAM_IGN_VARY },
@@ -62,7 +105,7 @@ cache validity time.
      { ngx_null_string, 0 }
  };
  
-@@ -5082,13 +5096,14 @@
+@@ -5077,14 +5091,15 @@ ngx_http_upstream_process_cache_control(ngx_http_request_t *r,
              return NGX_OK;
          }
  
@@ -72,14 +115,15 @@ cache validity time.
              return NGX_OK;
          }
  
--        r->cache->valid_sec = ngx_time() + n;
-+        r->cache->valid_sec = ngx_time() + n - u->headers_in.age_n;
+-        r->cache->valid_sec = ngx_min((ngx_uint_t) ngx_time() + n,
++        r->cache->valid_sec = ngx_min((ngx_uint_t) ngx_time() + n - u->headers_in.age_n,
+                                       NGX_MAX_INT_T_VALUE);
          u->headers_in.expired = 0;
 +        u->headers_in.max_age = 1;
      }
  
  extensions:
-@@ -5252,6 +5267,7 @@
+@@ -5265,6 +5280,7 @@ ngx_http_upstream_process_accel_expires(ngx_http_request_t *r,
              r->cache->valid_sec = ngx_time() + n;
              u->headers_in.no_cache = 0;
              u->headers_in.expired = 0;
@@ -87,7 +131,7 @@ cache validity time.
              return NGX_OK;
          }
      }
-@@ -5265,6 +5281,7 @@
+@@ -5278,6 +5294,7 @@ ngx_http_upstream_process_accel_expires(ngx_http_request_t *r,
          r->cache->valid_sec = n;
          u->headers_in.no_cache = 0;
          u->headers_in.expired = 0;
@@ -95,10 +139,11 @@ cache validity time.
      }
      }
  #endif
-@@ -5516,6 +5533,61 @@
+@@ -5528,6 +5545,61 @@ ngx_http_upstream_process_vary(ngx_http_request_t *r,
+ }
  
  
- static ngx_int_t
++static ngx_int_t
 +ngx_http_upstream_process_age(ngx_http_request_t *r,
 +    ngx_table_elt_t *h, ngx_uint_t offset)
 +{
@@ -153,15 +198,13 @@ cache validity time.
 +}
 +
 +
-+static ngx_int_t
+ static ngx_int_t
  ngx_http_upstream_copy_header_line(ngx_http_request_t *r, ngx_table_elt_t *h,
      ngx_uint_t offset)
- {
-@@ -6245,6 +6317,60 @@
- 
+@@ -6259,6 +6331,60 @@ ngx_http_upstream_cache_etag(ngx_http_request_t *r,
      return NGX_OK;
  }
-+
+ 
 +
 +static ngx_int_t
 +ngx_http_upstream_cache_age(ngx_http_request_t *r,
@@ -215,9 +258,12 @@ cache validity time.
 +
 +    return NGX_OK;
 +}
- 
++
  #endif
  
+ 
+diff --git a/src/http/ngx_http_upstream.h b/src/http/ngx_http_upstream.h
+index f3e9f7979..6d0441d6f 100644
 --- a/src/http/ngx_http_upstream.h
 +++ b/src/http/ngx_http_upstream.h
 @@ -55,6 +55,7 @@
@@ -228,7 +274,7 @@ cache validity time.
  
  
  typedef struct {
-@@ -298,14 +299,17 @@
+@@ -298,14 +299,17 @@ typedef struct {
  
      ngx_table_elt_t                 *cache_control;
      ngx_table_elt_t                 *set_cookie;
@@ -246,38 +292,6 @@ cache validity time.
  } ngx_http_upstream_headers_in_t;
  
  
---- a/src/http/modules/ngx_http_headers_filter_module.c
-+++ b/src/http/modules/ngx_http_headers_filter_module.c
-@@ -93,6 +93,10 @@
-                  offsetof(ngx_http_headers_out_t, etag),
-                  ngx_http_set_response_header },
- 
-+    { ngx_string("Age"),
-+                 offsetof(ngx_http_headers_out_t, age),
-+                 ngx_http_set_response_header },
-+
-     { ngx_null_string, 0, NULL }
- };
- 
-@@ -352,6 +356,11 @@
-         }
-     }
- 
-+    if (r->headers_out.age) {
-+        r->headers_out.age->hash = 0;
-+        r->headers_out.age = NULL;
-+    }
-+
-     e = r->headers_out.expires;
- 
-     if (e == NULL) {
---- a/src/http/ngx_http_request.h
-+++ b/src/http/ngx_http_request.h
-@@ -278,6 +278,7 @@
- 
-     ngx_table_elt_t                  *cache_control;
-     ngx_table_elt_t                  *link;
-+    ngx_table_elt_t                  *age;
- 
-     ngx_str_t                        *override_charset;
- 
+-- 
+2.43.0
+
