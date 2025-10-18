@@ -60,6 +60,7 @@ config.env.%:
 	sed 's/@MRUBY_ROOT@//;s/@MRUBY_INCDIR@//;s/@MRUBY_LIBDIR@//' \
 		$(BUILDDIR_$*)/ngx_mruby/config.in > $(BUILDDIR_$*)/ngx_mruby/config
 	cp -Pa $(CURDIR)/nginx-otel $(BUILDDIR_$*)/
+	cp -Pa $(CURDIR)/nginx-ssl-fingerprint $(BUILDDIR_$*)/
 	touch $@
 
 config.status.nginx: config.env.nginx
@@ -132,6 +133,7 @@ config.status.nginx: config.env.nginx
 		--add-dynamic-module=./ngx_mruby \
 		--add-dynamic-module=./nginx-otel \
 		--add-dynamic-module=./naxsi/naxsi_src \
+		--add-dynamic-module=./nginx-ssl-fingerprint \
 		--without-pcre2 \
 		--with-cc-opt="$(CFLAGS)" \
 		--with-ld-opt="$(LDFLAGS)"
@@ -208,6 +210,7 @@ config.status.nginx_debug: config.env.nginx_debug
 		--add-dynamic-module=./ngx_mruby \
 		--add-dynamic-module=./nginx-otel \
 		--add-dynamic-module=./naxsi/naxsi_src \
+		--add-dynamic-module=./nginx-ssl-fingerprint \
 		--without-pcre2 \
 		--with-cc-opt="$(CFLAGS)" \
 		--with-ld-opt="$(LDFLAGS)" \
