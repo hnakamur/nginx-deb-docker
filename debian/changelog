@@ -1,3 +1,11 @@
+nginx (1.28.0+mod.4-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add nginx-ssl-fingerprint module and lua-resty-events lua library
+  * d1afeb1d274620576c051a5a0a5d9695f845c8d3 modules/lua-resty-events (0.3.0-9-gd1afeb1)
+  * 5f30d9be1b35cf38ad5bce112893fe774ab4fec4 modules/nginx-ssl-fingerprint (heads/ja4_fingerprint)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 02 Nov 2025 08:17:09 +0900
+
 nginx (1.28.0+mod.3-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Move some libraries from Depends to Recommends and Suggests

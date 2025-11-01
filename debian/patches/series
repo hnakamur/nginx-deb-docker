@@ -8,3 +8,4 @@ nginx-1.11.2-ssl_cert_cb_yield.patch
 nginx-1.17.3-cache_manager.patch
 nginx_ltsv_http_log.patch
 freenginx-upstream-age.patch
+ja4_fingerprint.patch

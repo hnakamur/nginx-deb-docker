@@ -167,3 +167,9 @@
 [submodule "modules/naxsi"]
 	path = modules/naxsi
 	url = https://github.com/wargio/naxsi
+[submodule "modules/lua-resty-events"]
+	path = modules/lua-resty-events
+	url = https://github.com/Kong/lua-resty-events
+[submodule "modules/nginx-ssl-fingerprint"]
+	path = modules/nginx-ssl-fingerprint
+	url = https://hnakamur@github.com/hnakamur/nginx-ssl-fingerprint
