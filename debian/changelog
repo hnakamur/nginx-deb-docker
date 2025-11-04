@@ -1,3 +1,15 @@
+nginx (1.28.0+mod.4-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add Kong/lua-resty-events
+  * d1afeb1d274620576c051a5a0a5d9695f845c8d3 modules/lua-resty-events (0.3.0-9-gd1afeb1)
+  * Update modules
+  * 54e813547c54fe38697672f40a8793dc57c27cbf modules/lua-nginx-module (v0.10.16-424-g54e81354)
+  * 768ce9631dd91f864ba454af9615a81847c3230c modules/lua-resty-core (v0.1.18-187-g768ce96)
+  * Update nginx-tests
+  * b3c930601a7e78c220f5f74637c8bd9484998fea nginx-tests (remotes/origin/add_freenginx_proxy_cache_age)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Tue, 04 Nov 2025 21:18:03 +0900
+
 nginx (1.28.0+mod.3-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Move some libraries from Depends to Recommends and Suggests
