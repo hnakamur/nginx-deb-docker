@@ -40,4 +40,4 @@ SLAXML/*.lua 				usr/lib/nginx/lua
 lua-resty-woothee/lib/*			usr/lib/nginx/lua
 lua-resty-jump-consistent-hash/lib/*	usr/lib/nginx/lua
 lua-resty-openssl/lib/*	usr/lib/nginx/lua
-lua-resty-events/lualib/*	usr/lib/nginx/lua
+lua-resty-worker-events/lib/*	usr/lib/nginx/lua

@@ -167,6 +167,6 @@
 [submodule "modules/naxsi"]
 	path = modules/naxsi
 	url = https://github.com/wargio/naxsi
-[submodule "modules/lua-resty-events"]
-	path = modules/lua-resty-events
-	url = https://github.com/Kong/lua-resty-events
+[submodule "modules/lua-resty-worker-events"]
+	path = modules/lua-resty-worker-events
+	url = https://github.com/Kong/lua-resty-worker-events

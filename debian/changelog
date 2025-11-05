@@ -1,3 +1,11 @@
+nginx (1.28.0+mod.5-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add Kong/lua-resty-worker-events
+  * b90f067144fdc708dab6d29475979dab4d59a821 modules/lua-resty-worker-events (2.0.1-5-gb90f067)
+  * Remove modules/lua-resty-events
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 05 Nov 2025 13:45:44 +0900
+
 nginx (1.28.0+mod.4-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add Kong/lua-resty-events
