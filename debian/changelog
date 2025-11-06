@@ -1,3 +1,13 @@
+nginx (1.29.3+openssl.3.5.4+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add OpenSSL 3.5.4
+  * c1eeb9406b6142148f267594197d853403d10208 modules/openssl (openssl-3.5.4)
+  * Add hnakamur/nginx-ssl-fingerprint
+  * ebfd72b6874fa603bc57d3491e020d186824f772 modules/nginx-ssl-fingerprint (heads/ja4_fingerprint)
+  * Remove nginx-otel as it uses deprecated OpenSSL APIs
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 07 Nov 2025 08:47:58 +0900
+
 nginx (1.29.3+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add lua-resty-worker-events (2.0.1-5-gb90f067)
