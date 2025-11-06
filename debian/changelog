@@ -1,3 +1,14 @@
+nginx (1.29.3+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add lua-resty-worker-events (2.0.1-5-gb90f067)
+  * b90f067144fdc708dab6d29475979dab4d59a821 modules/lua-resty-worker-events (2.0.1-5-gb90f067)
+  * Update modules
+  * de02114acc8bbd4b17da933d513f736b7f45728b modules/lua-nginx-module (v0.10.16-425-gde02114a)
+  * 768ce9631dd91f864ba454af9615a81847c3230c modules/lua-resty-core (v0.1.18-187-g768ce96)
+  * db6c8f0d66cb54896aefb07dc51ed1bff2bd0391 modules/stream-lua-nginx-module (v0.0.8-150-gdb6c8f0)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 06 Nov 2025 21:21:18 +0900
+
 nginx (1.29.3+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * 1.29.3
