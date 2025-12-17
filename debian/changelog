@@ -1,3 +1,9 @@
+nginx (1.28.0+mod.5-2hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Add cgroup_per_worker.patch
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 17 Dec 2025 16:17:43 +0900
+
 nginx (1.28.0+mod.5-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add Kong/lua-resty-worker-events
