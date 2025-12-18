@@ -8,11 +8,14 @@ MODSECURITY_DEB_VERSION=3.0.14-1hn1
 
 LOGUNLIMITED_BUILDER=logunlimited
 
+SHELL := /bin/bash
+.SHELLFLAGS := -euo pipefail -c
+
 # Ubuntu 24.04
 deb-ubuntu2404: build-ubuntu2404
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04:/dist nginx-ubuntu2404 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
-	docker run --rm -it nginx-ubuntu2404 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log
+	docker run --rm -it nginx-ubuntu2404 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log || :
 	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/
 
@@ -42,7 +45,7 @@ run-ubuntu2404:
 deb-ubuntu2204: build-ubuntu2204
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04:/dist nginx-ubuntu2204 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
-	docker run --rm -it nginx-ubuntu2204 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
+	docker run --rm -it nginx-ubuntu2204 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log || :
 	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/
 
@@ -72,7 +75,7 @@ run-ubuntu2204:
 deb-debian12: build-debian12
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12:/dist nginx-debian12 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
-	docker run --rm -it nginx-debian12 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.log
+	docker run --rm -it nginx-debian12 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.log || :
 	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/
 
