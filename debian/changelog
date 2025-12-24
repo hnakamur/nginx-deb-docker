@@ -1,3 +1,9 @@
+nginx (1.28.1+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * 1.28.1
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 24 Dec 2025 09:56:05 +0900
+
 nginx (1.28.0+mod.5-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add cgroup_per_worker.patch

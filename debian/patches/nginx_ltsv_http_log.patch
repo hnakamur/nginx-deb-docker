@@ -1,6 +1,6 @@
 --- a/src/core/ngx_string.c
 +++ b/src/core/ngx_string.c
-@@ -1964,6 +1964,59 @@
+@@ -1990,6 +1990,59 @@
  }
  
  
@@ -62,7 +62,7 @@
      ngx_rbtree_node_t *node, ngx_rbtree_node_t *sentinel)
 --- a/src/core/ngx_string.h
 +++ b/src/core/ngx_string.h
-@@ -212,6 +212,7 @@
+@@ -213,6 +213,7 @@
  void ngx_unescape_uri(u_char **dst, u_char **src, size_t size, ngx_uint_t type);
  uintptr_t ngx_escape_html(u_char *dst, u_char *src, size_t size);
  uintptr_t ngx_escape_json(u_char *dst, u_char *src, size_t size);
