@@ -6,8 +6,6 @@ endif
 LUAJIT_DEB_VERSION=2.1.20251030-2hn1
 MODSECURITY_DEB_VERSION=3.0.14-1hn1
 
-LOGUNLIMITED_BUILDER=logunlimited
-
 SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -c
 
@@ -19,13 +17,13 @@ deb-ubuntu2404: build-ubuntu2404
 	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/
 
-build-ubuntu2404: buildkit-logunlimited
+build-ubuntu2404:
 	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04
 	PKG_REL_DISTRIB=ubuntu24.04; \
 	(set -x; \
 	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
 	git submodule status; \
-	docker buildx build --progress plain --builder ${LOGUNLIMITED_BUILDER} --load \
+	docker buildx build --progress plain --load \
 		${DOCKER_NO_CACHE} \
 		--build-arg OS_TYPE=ubuntu --build-arg OS_VERSION=24.04 \
 		--build-arg PKG_REL_DISTRIB=$${PKG_REL_DISTRIB} \
@@ -49,13 +47,13 @@ deb-ubuntu2204: build-ubuntu2204
 	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/
 
-build-ubuntu2204: buildkit-logunlimited
+build-ubuntu2204:
 	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04
 	PKG_REL_DISTRIB=ubuntu22.04; \
 	(set -x; \
 	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
 	git submodule status; \
-	docker buildx build --progress plain --builder ${LOGUNLIMITED_BUILDER} --load \
+	docker buildx build --progress plain --load \
 		${DOCKER_NO_CACHE} \
 		--build-arg OS_TYPE=ubuntu --build-arg OS_VERSION=22.04 \
 		--build-arg PKG_REL_DISTRIB=$${PKG_REL_DISTRIB} \
@@ -79,13 +77,13 @@ deb-debian12: build-debian12
 	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.log
 	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/
 
-build-debian12: buildkit-logunlimited
+build-debian12:
 	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian12
 	PKG_REL_DISTRIB=debian12; \
 	(set -x; \
 	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
 	git submodule status; \
-	docker buildx build --progress plain --builder ${LOGUNLIMITED_BUILDER} --load \
+	docker buildx build --progress plain --load \
 		${DOCKER_NO_CACHE} \
 		--build-arg OS_TYPE=debian --build-arg OS_VERSION=12 \
 		--build-arg PKG_REL_DISTRIB=$${PKG_REL_DISTRIB} \
@@ -100,13 +98,6 @@ build-debian12: buildkit-logunlimited
 
 run-debian12:
 	docker run --rm -it nginx-debian12 bash
-
-buildkit-logunlimited:
-	if ! docker buildx inspect logunlimited 2>/dev/null; then \
-		docker buildx create --bootstrap --name ${LOGUNLIMITED_BUILDER} \
-			--driver-opt env.BUILDKIT_STEP_LOG_MAX_SIZE=-1 \
-			--driver-opt env.BUILDKIT_STEP_LOG_MAX_SPEED=-1; \
-	fi
 
 exec:
 	docker exec -it $$(docker ps -q) bash
