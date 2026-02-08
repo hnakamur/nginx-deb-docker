@@ -1,0 +1,103 @@
+From f25e1202ec2f0976bc6e10609c5c51f5f1f7eaa3 Mon Sep 17 00:00:00 2001
+From: Hiroaki Nakamura <hnakamur@gmail.com>
+Date: Wed, 28 Jan 2026 12:59:37 +0900
+Subject: [PATCH] Add request_body_length variable
+
+---
+ src/http/ngx_http_request.c       |  1 +
+ src/http/ngx_http_request.h       |  1 +
+ src/http/ngx_http_variables.c     | 27 +++++++++++++++++++++++++++
+ src/http/v2/ngx_http_v2.c         |  1 +
+ src/http/v3/ngx_http_v3_request.c |  1 +
+ 5 files changed, 31 insertions(+)
+
+--- a/src/http/ngx_http_request.c
++++ b/src/http/ngx_http_request.c
+@@ -1541,6 +1541,7 @@
+                            "http header done");
+ 
+             r->request_length += r->header_in->pos - r->header_name_start;
++            r->request_header_length = r->request_length;
+ 
+             r->http_state = NGX_HTTP_PROCESS_REQUEST_STATE;
+ 
+--- a/src/http/ngx_http_request.h
++++ b/src/http/ngx_http_request.h
+@@ -451,6 +451,7 @@
+     size_t                            header_size;
+ 
+     off_t                             request_length;
++    off_t                             request_header_length;
+ 
+     ngx_uint_t                        err_status;
+ 
+--- a/src/http/ngx_http_variables.c
++++ b/src/http/ngx_http_variables.c
+@@ -105,6 +105,8 @@
+     ngx_http_variable_value_t *v, uintptr_t data);
+ static ngx_int_t ngx_http_variable_request_length(ngx_http_request_t *r,
+     ngx_http_variable_value_t *v, uintptr_t data);
++static ngx_int_t ngx_http_variable_request_body_length(ngx_http_request_t *r,
++    ngx_http_variable_value_t *v, uintptr_t data);
+ static ngx_int_t ngx_http_variable_request_time(ngx_http_request_t *r,
+     ngx_http_variable_value_t *v, uintptr_t data);
+ static ngx_int_t ngx_http_variable_request_id(ngx_http_request_t *r,
+@@ -309,6 +311,9 @@
+     { ngx_string("request_length"), NULL, ngx_http_variable_request_length,
+       0, NGX_HTTP_VAR_NOCACHEABLE, 0 },
+ 
++    { ngx_string("request_body_length"), NULL, ngx_http_variable_request_body_length,
++      0, NGX_HTTP_VAR_NOCACHEABLE, 0 },
++
+     { ngx_string("request_time"), NULL, ngx_http_variable_request_time,
+       0, NGX_HTTP_VAR_NOCACHEABLE, 0 },
+ 
+@@ -2259,6 +2264,28 @@
+     v->valid = 1;
+     v->no_cacheable = 0;
+     v->not_found = 0;
++    v->data = p;
++
++    return NGX_OK;
++}
++
++
++static ngx_int_t
++ngx_http_variable_request_body_length(ngx_http_request_t *r,
++    ngx_http_variable_value_t *v, uintptr_t data)
++{
++    u_char  *p;
++
++    p = ngx_pnalloc(r->pool, NGX_OFF_T_LEN);
++    if (p == NULL) {
++        return NGX_ERROR;
++    }
++
++    v->len = ngx_sprintf(p, "%O",
++                         r->request_length - r->request_header_length) - p;
++    v->valid = 1;
++    v->no_cacheable = 0;
++    v->not_found = 0;
+     v->data = p;
+ 
+     return NGX_OK;
+--- a/src/http/v2/ngx_http_v2.c
++++ b/src/http/v2/ngx_http_v2.c
+@@ -3886,6 +3886,7 @@
+     h2c = r->stream->connection;
+ 
+     h2c->payload_bytes += r->request_length;
++    r->request_header_length = r->request_length;
+ 
+     ngx_http_process_request(r);
+ 
+--- a/src/http/v3/ngx_http_v3_request.c
++++ b/src/http/v3/ngx_http_v3_request.c
+@@ -551,6 +551,7 @@
+ 
+         r->request_length += b->pos - p;
+         h3c->total_bytes += b->pos - p;
++        r->request_header_length = r->request_length;
+ 
+         if (ngx_http_v3_check_flood(c) != NGX_OK) {
+             ngx_http_close_request(r, NGX_HTTP_CLOSE);
