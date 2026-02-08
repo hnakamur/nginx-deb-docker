@@ -1,3 +1,9 @@
+nginx (1.28.2+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * 1.28.2
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 08 Feb 2026 17:56:59 +0900
+
 nginx (1.28.1+mod.1-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add request_body_length_variable.patch
