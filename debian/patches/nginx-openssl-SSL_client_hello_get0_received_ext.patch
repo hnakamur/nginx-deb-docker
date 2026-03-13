@@ -1,21 +1,31 @@
+From 232e2855671cc077ff951023a5308567ed195d53 Mon Sep 17 00:00:00 2001
+From: Hiroaki Nakamura <hnakamur@gmail.com>
+Date: Mon, 3 Nov 2025 20:52:03 +0900
+Subject: [PATCH] Add SSL_client_hello_get0_received_ext
+
+---
+ openssl/include/openssl/ssl.h.in |  2 ++
+ openssl/ssl/ssl_lib.c            | 35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+
 diff --git a/openssl/include/openssl/ssl.h.in b/openssl/include/openssl/ssl.h.in
-index 383c5bc411..2019884e73 100644
+index bdcc68529b..b554ae6a7f 100644
 --- a/openssl/include/openssl/ssl.h.in
 +++ b/openssl/include/openssl/ssl.h.in
-@@ -1922,6 +1922,8 @@ size_t SSL_client_hello_get0_compression_methods(SSL *s,
+@@ -1928,6 +1928,8 @@ size_t SSL_client_hello_get0_compression_methods(SSL *s,
  int SSL_client_hello_get1_extensions_present(SSL *s, int **out, size_t *outlen);
  int SSL_client_hello_get_extension_order(SSL *s, uint16_t *exts,
-                                          size_t *num_exts);
+     size_t *num_exts);
 +int SSL_client_hello_get0_received_ext(SSL *s, uint16_t *exts,
-+                                       size_t *num_exts);
++    size_t *num_exts);
  int SSL_client_hello_get0_ext(SSL *s, unsigned int type,
-                               const unsigned char **out, size_t *outlen);
+     const unsigned char **out, size_t *outlen);
  
 diff --git a/openssl/ssl/ssl_lib.c b/openssl/ssl/ssl_lib.c
-index 9696a4c55f..beb71fabdd 100644
+index ac77faa677..7f9313558e 100644
 --- a/openssl/ssl/ssl_lib.c
 +++ b/openssl/ssl/ssl_lib.c
-@@ -6930,6 +6930,41 @@ int SSL_client_hello_get_extension_order(SSL *s, uint16_t *exts, size_t *num_ext
+@@ -6885,6 +6885,41 @@ int SSL_client_hello_get_extension_order(SSL *s, uint16_t *exts, size_t *num_ext
      return 1;
  }
  
@@ -55,5 +65,8 @@ index 9696a4c55f..beb71fabdd 100644
 +}
 +
  int SSL_client_hello_get0_ext(SSL *s, unsigned int type, const unsigned char **out,
-                        size_t *outlen)
+     size_t *outlen)
  {
+-- 
+2.51.0
+

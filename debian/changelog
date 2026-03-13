@@ -1,3 +1,14 @@
+nginx (1.29.6+openssl.3.5.5+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * nginx 1.29.6
+  * OpenSSL 3.5.5
+  * Update nginx-tests
+  * 67b5686b4419b4cb8caa502711c41815f5279751 modules/openssl (openssl-3.5.5)
+  * cb85fbbfbad6adf5ce71ed4f9b585f498c05c19d nginx (release-1.29.6)
+  * d341286693105f60ca2e02798bd3f2a695906fcb nginx-tests (remotes/origin/add_freenginx_proxy_cache_age)
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 13 Mar 2026 21:50:11 +0900
+
 nginx (1.29.3+openssl.3.5.4+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Add OpenSSL 3.5.4
