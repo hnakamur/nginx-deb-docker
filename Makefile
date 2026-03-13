@@ -8,6 +8,36 @@ MODSECURITY_DEB_VERSION=3.0.14-1hn1
 
 LOGUNLIMITED_BUILDER=logunlimited
 
+# Ubuntu 25.10
+deb-ubuntu2510: build-ubuntu2510
+	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10:/dist nginx-ubuntu2510 bash -c \
+	"cp /src/*${PKG_VERSION}* /dist/"
+	docker run --rm -it nginx-ubuntu2510 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10.log
+	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10.log
+	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/
+
+build-ubuntu2510: buildkit-logunlimited
+	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10
+	PKG_REL_DISTRIB=ubuntu25.10; \
+	(set -x; \
+	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
+	git submodule status; \
+	docker buildx build --progress plain --builder ${LOGUNLIMITED_BUILDER} --load \
+		${DOCKER_NO_CACHE} \
+		--build-arg OS_TYPE=ubuntu --build-arg OS_VERSION=25.10 \
+		--build-arg PKG_REL_DISTRIB=$${PKG_REL_DISTRIB} \
+		--build-arg PKG_VERSION=${PKG_VERSION} \
+		--build-arg LUAJIT_DEB_VERSION=${LUAJIT_DEB_VERSION} \
+		--build-arg LUAJIT_DEB_OS_ID=ubuntu25.10 \
+		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
+		--build-arg MODSECURITY_DEB_OS_ID=ubuntu25.10 \
+		-t nginx-ubuntu2510 . \
+	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
+	sudo xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+
+run-ubuntu2510:
+	docker run --rm -it nginx-ubuntu2510 bash
+
 # Ubuntu 24.04
 deb-ubuntu2404: build-ubuntu2404
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04:/dist nginx-ubuntu2404 bash -c \
