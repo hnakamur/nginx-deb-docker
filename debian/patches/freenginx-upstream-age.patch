@@ -40,7 +40,7 @@ cache validity time.
      if (e == NULL) {
 --- a/src/http/ngx_http_request.h
 +++ b/src/http/ngx_http_request.h
-@@ -278,6 +278,7 @@
+@@ -281,6 +281,7 @@
  
      ngx_table_elt_t                  *cache_control;
      ngx_table_elt_t                  *link;
