@@ -1,6 +1,6 @@
 --- a/src/event/ngx_event_openssl.c
 +++ b/src/event/ngx_event_openssl.c
-@@ -2190,6 +2190,291 @@
+@@ -2197,6 +2197,291 @@
  }
  
  
@@ -292,7 +292,7 @@
  ngx_int_t
  ngx_ssl_handshake(ngx_connection_t *c)
  {
-@@ -2209,6 +2494,11 @@
+@@ -2216,6 +2501,11 @@
  
      ngx_ssl_clear_error(c->log);
  
@@ -306,7 +306,7 @@
      ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_do_handshake: %d", n);
 --- a/src/event/ngx_event_openssl.h
 +++ b/src/event/ngx_event_openssl.h
-@@ -144,6 +144,17 @@
+@@ -149,6 +149,17 @@
      unsigned                    early_preread:1;
      unsigned                    write_blocked:1;
      unsigned                    sni_accepted:1;
@@ -360,7 +360,7 @@
          rc = ngx_http_v2_pseudo_header(r, header);
  
          if (rc == NGX_OK) {
-@@ -2200,6 +2213,12 @@
+@@ -2209,6 +2222,12 @@
          ngx_log_debug2(NGX_LOG_DEBUG_HTTP, h2c->connection->log, 0,
                         "http2 setting %ui:%ui", id, value);
  
@@ -373,7 +373,7 @@
          switch (id) {
  
          case NGX_HTTP_V2_INIT_WINDOW_SIZE_SETTING:
-@@ -2484,6 +2503,9 @@
+@@ -2493,6 +2512,9 @@
      }
  
      h2c->send_window += window;

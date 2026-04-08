@@ -40,7 +40,7 @@ cache validity time.
      if (e == NULL) {
 --- a/src/http/ngx_http_request.h
 +++ b/src/http/ngx_http_request.h
-@@ -281,6 +281,7 @@
+@@ -282,6 +282,7 @@
  
      ngx_table_elt_t                  *cache_control;
      ngx_table_elt_t                  *link;
@@ -99,7 +99,7 @@ cache validity time.
      { ngx_null_string, 0 }
  };
  
-@@ -5118,14 +5132,15 @@
+@@ -5117,14 +5131,15 @@
              return NGX_OK;
          }
  
@@ -117,7 +117,7 @@ cache validity time.
      }
  
  extensions:
-@@ -5306,6 +5321,7 @@
+@@ -5305,6 +5320,7 @@
              r->cache->valid_sec = ngx_time() + n;
              u->headers_in.no_cache = 0;
              u->headers_in.expired = 0;
@@ -125,7 +125,7 @@ cache validity time.
              return NGX_OK;
          }
      }
-@@ -5319,6 +5335,7 @@
+@@ -5318,6 +5334,7 @@
          r->cache->valid_sec = n;
          u->headers_in.no_cache = 0;
          u->headers_in.expired = 0;
@@ -133,7 +133,7 @@ cache validity time.
      }
      }
  #endif
-@@ -5570,6 +5587,61 @@
+@@ -5569,6 +5586,61 @@
  
  
  static ngx_int_t
@@ -195,7 +195,7 @@ cache validity time.
  ngx_http_upstream_copy_header_line(ngx_http_request_t *r, ngx_table_elt_t *h,
      ngx_uint_t offset)
  {
-@@ -6299,6 +6371,60 @@
+@@ -6298,6 +6370,60 @@
  
      return NGX_OK;
  }

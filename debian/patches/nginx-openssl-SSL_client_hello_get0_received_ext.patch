@@ -8,11 +8,9 @@ Subject: [PATCH] Add SSL_client_hello_get0_received_ext
  openssl/ssl/ssl_lib.c            | 35 +++++++++++++++++++++++++++++++++++
  2 files changed, 37 insertions(+)
 
-diff --git a/openssl/include/openssl/ssl.h.in b/openssl/include/openssl/ssl.h.in
-index bdcc68529b..b554ae6a7f 100644
 --- a/openssl/include/openssl/ssl.h.in
 +++ b/openssl/include/openssl/ssl.h.in
-@@ -1928,6 +1928,8 @@ size_t SSL_client_hello_get0_compression_methods(SSL *s,
+@@ -1928,6 +1928,8 @@
  int SSL_client_hello_get1_extensions_present(SSL *s, int **out, size_t *outlen);
  int SSL_client_hello_get_extension_order(SSL *s, uint16_t *exts,
      size_t *num_exts);
@@ -21,11 +19,9 @@ index bdcc68529b..b554ae6a7f 100644
  int SSL_client_hello_get0_ext(SSL *s, unsigned int type,
      const unsigned char **out, size_t *outlen);
  
-diff --git a/openssl/ssl/ssl_lib.c b/openssl/ssl/ssl_lib.c
-index ac77faa677..7f9313558e 100644
 --- a/openssl/ssl/ssl_lib.c
 +++ b/openssl/ssl/ssl_lib.c
-@@ -6885,6 +6885,41 @@ int SSL_client_hello_get_extension_order(SSL *s, uint16_t *exts, size_t *num_ext
+@@ -6883,6 +6883,41 @@
      return 1;
  }
  
@@ -67,6 +63,3 @@ index ac77faa677..7f9313558e 100644
  int SSL_client_hello_get0_ext(SSL *s, unsigned int type, const unsigned char **out,
      size_t *outlen)
  {
--- 
-2.51.0
-
