@@ -22,7 +22,7 @@ cache validity time.
  #endif
  
  static void ngx_http_upstream_init_request(ngx_http_request_t *r);
-@@ -136,6 +138,8 @@
+@@ -139,6 +141,8 @@
      ngx_table_elt_t *h, ngx_uint_t offset);
  static ngx_int_t ngx_http_upstream_process_vary(ngx_http_request_t *r,
      ngx_table_elt_t *h, ngx_uint_t offset);
@@ -31,7 +31,7 @@ cache validity time.
  static ngx_int_t ngx_http_upstream_copy_header_line(ngx_http_request_t *r,
      ngx_table_elt_t *h, ngx_uint_t offset);
  static ngx_int_t
-@@ -297,6 +301,11 @@
+@@ -300,6 +304,11 @@
                   ngx_http_upstream_copy_multi_header_lines,
                   offsetof(ngx_http_headers_out_t, link), 0 },
  
@@ -43,7 +43,7 @@ cache validity time.
      { ngx_string("X-Accel-Expires"),
                   ngx_http_upstream_process_accel_expires, 0,
                   ngx_http_upstream_copy_header_line, 0, 0 },
-@@ -448,6 +457,10 @@
+@@ -451,6 +460,10 @@
        ngx_http_upstream_cache_etag, 0,
        NGX_HTTP_VAR_NOCACHEABLE|NGX_HTTP_VAR_NOHASH, 0 },
  
@@ -54,7 +54,7 @@ cache validity time.
  #endif
  
      { ngx_string("upstream_http_"), NULL, ngx_http_upstream_header_variable,
-@@ -493,6 +506,7 @@
+@@ -496,6 +509,7 @@
      { ngx_string("Cache-Control"), NGX_HTTP_UPSTREAM_IGN_CACHE_CONTROL },
      { ngx_string("Set-Cookie"), NGX_HTTP_UPSTREAM_IGN_SET_COOKIE },
      { ngx_string("Vary"), NGX_HTTP_UPSTREAM_IGN_VARY },
@@ -62,7 +62,7 @@ cache validity time.
      { ngx_null_string, 0 }
  };
  
-@@ -4932,14 +4946,15 @@
+@@ -5117,14 +5131,15 @@
              return NGX_OK;
          }
  
@@ -80,7 +80,7 @@ cache validity time.
      }
  
  extensions:
-@@ -5120,6 +5135,7 @@
+@@ -5305,6 +5320,7 @@
              r->cache->valid_sec = ngx_time() + n;
              u->headers_in.no_cache = 0;
              u->headers_in.expired = 0;
@@ -88,7 +88,7 @@ cache validity time.
              return NGX_OK;
          }
      }
-@@ -5133,6 +5149,7 @@
+@@ -5318,6 +5334,7 @@
          r->cache->valid_sec = n;
          u->headers_in.no_cache = 0;
          u->headers_in.expired = 0;
@@ -96,7 +96,7 @@ cache validity time.
      }
      }
  #endif
-@@ -5384,6 +5401,61 @@
+@@ -5569,6 +5586,61 @@
  
  
  static ngx_int_t
@@ -158,7 +158,7 @@ cache validity time.
  ngx_http_upstream_copy_header_line(ngx_http_request_t *r, ngx_table_elt_t *h,
      ngx_uint_t offset)
  {
-@@ -6113,6 +6185,60 @@
+@@ -6298,6 +6370,60 @@
  
      return NGX_OK;
  }
@@ -221,15 +221,15 @@ cache validity time.
  
 --- a/src/http/ngx_http_upstream.h
 +++ b/src/http/ngx_http_upstream.h
-@@ -54,6 +54,7 @@
+@@ -55,6 +55,7 @@
  #define NGX_HTTP_UPSTREAM_IGN_XA_BUFFERING   0x00000080
  #define NGX_HTTP_UPSTREAM_IGN_XA_CHARSET     0x00000100
  #define NGX_HTTP_UPSTREAM_IGN_VARY           0x00000200
 +#define NGX_HTTP_UPSTREAM_IGN_AGE            0x00000400
  
  
- typedef struct {
-@@ -296,14 +297,17 @@
+ #define NGX_HTTP_UPSTREAM_NOTIFY_HEADER      0x1
+@@ -302,14 +303,17 @@
  
      ngx_table_elt_t                 *cache_control;
      ngx_table_elt_t                 *set_cookie;
@@ -249,7 +249,7 @@ cache validity time.
  
 --- a/src/http/modules/ngx_http_headers_filter_module.c
 +++ b/src/http/modules/ngx_http_headers_filter_module.c
-@@ -93,6 +93,10 @@
+@@ -100,6 +100,10 @@
                   offsetof(ngx_http_headers_out_t, etag),
                   ngx_http_set_response_header },
  
@@ -260,7 +260,7 @@ cache validity time.
      { ngx_null_string, 0, NULL }
  };
  
-@@ -352,6 +356,11 @@
+@@ -383,6 +387,11 @@
          }
      }
  
@@ -274,7 +274,7 @@ cache validity time.
      if (e == NULL) {
 --- a/src/http/ngx_http_request.h
 +++ b/src/http/ngx_http_request.h
-@@ -277,6 +277,7 @@
+@@ -282,6 +282,7 @@
  
      ngx_table_elt_t                  *cache_control;
      ngx_table_elt_t                  *link;

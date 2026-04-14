@@ -13,7 +13,7 @@ Subject: [PATCH] Add request_body_length variable
 
 --- a/src/http/ngx_http_request.c
 +++ b/src/http/ngx_http_request.c
-@@ -1541,6 +1541,7 @@
+@@ -1554,6 +1554,7 @@
                             "http header done");
  
              r->request_length += r->header_in->pos - r->header_name_start;
@@ -23,7 +23,7 @@ Subject: [PATCH] Add request_body_length variable
  
 --- a/src/http/ngx_http_request.h
 +++ b/src/http/ngx_http_request.h
-@@ -450,6 +450,7 @@
+@@ -455,6 +455,7 @@
      size_t                            header_size;
  
      off_t                             request_length;
@@ -33,7 +33,7 @@ Subject: [PATCH] Add request_body_length variable
  
 --- a/src/http/ngx_http_variables.c
 +++ b/src/http/ngx_http_variables.c
-@@ -101,6 +101,8 @@
+@@ -105,6 +105,8 @@
      ngx_http_variable_value_t *v, uintptr_t data);
  static ngx_int_t ngx_http_variable_request_length(ngx_http_request_t *r,
      ngx_http_variable_value_t *v, uintptr_t data);
@@ -42,7 +42,7 @@ Subject: [PATCH] Add request_body_length variable
  static ngx_int_t ngx_http_variable_request_time(ngx_http_request_t *r,
      ngx_http_variable_value_t *v, uintptr_t data);
  static ngx_int_t ngx_http_variable_request_id(ngx_http_request_t *r,
-@@ -299,6 +301,9 @@
+@@ -309,6 +311,9 @@
      { ngx_string("request_length"), NULL, ngx_http_variable_request_length,
        0, NGX_HTTP_VAR_NOCACHEABLE, 0 },
  
@@ -52,7 +52,7 @@ Subject: [PATCH] Add request_body_length variable
      { ngx_string("request_time"), NULL, ngx_http_variable_request_time,
        0, NGX_HTTP_VAR_NOCACHEABLE, 0 },
  
-@@ -2204,6 +2209,28 @@
+@@ -2259,6 +2264,28 @@
      v->valid = 1;
      v->no_cacheable = 0;
      v->not_found = 0;
@@ -83,7 +83,7 @@ Subject: [PATCH] Add request_body_length variable
      return NGX_OK;
 --- a/src/http/v2/ngx_http_v2.c
 +++ b/src/http/v2/ngx_http_v2.c
-@@ -3884,6 +3884,7 @@
+@@ -3895,6 +3895,7 @@
      h2c = r->stream->connection;
  
      h2c->payload_bytes += r->request_length;
