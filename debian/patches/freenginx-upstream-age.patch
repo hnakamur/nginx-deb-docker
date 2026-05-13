@@ -99,7 +99,7 @@ cache validity time.
      { ngx_null_string, 0 }
  };
  
-@@ -5117,14 +5131,15 @@
+@@ -5129,14 +5143,15 @@
              return NGX_OK;
          }
  
@@ -117,7 +117,7 @@ cache validity time.
      }
  
  extensions:
-@@ -5305,6 +5320,7 @@
+@@ -5317,6 +5332,7 @@
              r->cache->valid_sec = ngx_time() + n;
              u->headers_in.no_cache = 0;
              u->headers_in.expired = 0;
@@ -125,7 +125,7 @@ cache validity time.
              return NGX_OK;
          }
      }
-@@ -5318,6 +5334,7 @@
+@@ -5330,6 +5346,7 @@
          r->cache->valid_sec = n;
          u->headers_in.no_cache = 0;
          u->headers_in.expired = 0;
@@ -133,7 +133,7 @@ cache validity time.
      }
      }
  #endif
-@@ -5569,6 +5586,61 @@
+@@ -5581,6 +5598,61 @@
  
  
  static ngx_int_t
@@ -195,7 +195,7 @@ cache validity time.
  ngx_http_upstream_copy_header_line(ngx_http_request_t *r, ngx_table_elt_t *h,
      ngx_uint_t offset)
  {
-@@ -6298,6 +6370,60 @@
+@@ -6310,6 +6382,60 @@
  
      return NGX_OK;
  }
@@ -266,7 +266,7 @@ cache validity time.
  
  
  #define NGX_HTTP_UPSTREAM_NOTIFY_HEADER      0x1
-@@ -302,14 +303,17 @@
+@@ -303,14 +304,17 @@
  
      ngx_table_elt_t                 *cache_control;
      ngx_table_elt_t                 *set_cookie;
