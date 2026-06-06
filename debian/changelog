@@ -29,6 +29,7 @@ nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
   * Update njs (d9c97cf9a13e7a26206345b774fcfe609fbe4ef3)
   * Update redis2-nginx-module (55eea7a18e710620076cc6df39b24b431c24c628)
   * Update set-misc-nginx-module (6c539186a5c96a24229f069a8e264bf32a7c858b)
+  * Update srcache-nginx-module (2372ccdaf528d128dbaee8c0fa67fea52f6bf1a6)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 07 Jun 2026 08:07:06 +0900
 
