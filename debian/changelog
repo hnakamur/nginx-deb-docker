@@ -22,6 +22,7 @@ nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
   * Update lua-resty-signal (4a69daaf3508415a6759ffdcb4ff8f4b14b7b199)
   * Update lua-resty-string (e10c1cc2ca85ea277a8d759333444f37f77c884c)
   * Update lua-resty-upload (dc8370289eedba2d7f337475d229439b946b4c14)
+  * Update lua-resty-upstream-healthcheck (a8e4815c449e20a00fda066c19f758dc91b68640)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 07 Jun 2026 08:07:06 +0900
 
