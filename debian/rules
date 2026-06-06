@@ -56,7 +56,6 @@ config.env.%:
 	cp -Pa $(CURDIR)/njs $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/lua-resty-openssl $(BUILDDIR_$*)/
 	cp -Pa $(CURDIR)/ngx_mruby $(BUILDDIR_$*)/
-	cp -Pa $(CURDIR)/naxsi $(BUILDDIR_$*)/
 	sed 's/@MRUBY_ROOT@//;s/@MRUBY_INCDIR@//;s/@MRUBY_LIBDIR@//' \
 		$(BUILDDIR_$*)/ngx_mruby/config.in > $(BUILDDIR_$*)/ngx_mruby/config
 	cp -Pa $(CURDIR)/nginx-ssl-fingerprint $(BUILDDIR_$*)/
@@ -131,7 +130,6 @@ config.status.nginx: config.env.nginx
 		--add-dynamic-module=./njs/nginx \
 		--add-dynamic-module=./ModSecurity-nginx \
 		--add-dynamic-module=./ngx_mruby \
-		--add-dynamic-module=./naxsi/naxsi_src \
 		--add-dynamic-module=./nginx-ssl-fingerprint \
 		--with-openssl=./openssl \
 		--with-openssl-opt="no-apps no-legacy no-idea no-mdc2 no-rc5 no-zlib no-ssl3 no-tests no-ssl3-method enable-rfc3779 enable-cms no-capieng no-rdrand" \
@@ -209,7 +207,6 @@ config.status.nginx_debug: config.env.nginx_debug
 		--add-dynamic-module=./njs/nginx \
 		--add-dynamic-module=./ModSecurity-nginx \
 		--add-dynamic-module=./ngx_mruby \
-		--add-dynamic-module=./naxsi/naxsi_src \
 		--add-dynamic-module=./nginx-ssl-fingerprint \
 		--with-openssl=./openssl \
 		--with-openssl-opt="no-apps no-legacy no-idea no-mdc2 no-rc5 no-zlib no-ssl3 no-tests no-ssl3-method enable-rfc3779 enable-cms no-capieng no-rdrand" \

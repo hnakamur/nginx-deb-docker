@@ -6,6 +6,7 @@ nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
   * Update lua-resty-core (9f8dc0500ea288c70dd81d9fbd77df9d74405787)
   * Update echo-nginx-module (1965ee83b8a7842305c34c8b957090fb5a5473dc)
   * Update headers-more-nginx-module (0bf283ff92017acd616814b0e5153e0ccf93e2c9)
+  * Remove naxsi
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 07 Jun 2026 08:07:06 +0900
 
