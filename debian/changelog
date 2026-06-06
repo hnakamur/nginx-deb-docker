@@ -23,6 +23,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update lua-resty-websocket (8b0469fc4c2e2bef62004f1c6a12f699387d2640)
   * Update lua-upstream-nginx-module (a1c451affc75c757c2b23e2dcf8f56ec2efc6ab0)
   * Update memc-nginx-module (38a23c3f525d23d54f90b4b7737591bd69a14bbc)
+  * Update redis2-nginx-module (55eea7a18e710620076cc6df39b24b431c24c628)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
