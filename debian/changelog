@@ -26,6 +26,7 @@ nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
   * Update lua-resty-websocket (8b0469fc4c2e2bef62004f1c6a12f699387d2640)
   * Update lua-upstream-nginx-module (a1c451affc75c757c2b23e2dcf8f56ec2efc6ab0)
   * Update memc-nginx-module (38a23c3f525d23d54f90b4b7737591bd69a14bbc)
+  * Update njs (d9c97cf9a13e7a26206345b774fcfe609fbe4ef3)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 07 Jun 2026 08:07:06 +0900
 
