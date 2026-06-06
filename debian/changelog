@@ -16,6 +16,7 @@ nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
   * Update lua-resty-memcached (ca36fecaf3d10705cde00934ef9dcfc96e01fe6b)
   * Update lua-resty-mysql (5d46ff656e2b0ec48d957c5ab757d3fc12a8edea)
   * Update lua-resty-openssl (824a05362d374d49403f97fb945863bc70351637)
+  * Update lua-resty-redis (4c1e3757998e53bf032bf3c9293ba31ced1ca85d)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 07 Jun 2026 08:07:06 +0900
 
