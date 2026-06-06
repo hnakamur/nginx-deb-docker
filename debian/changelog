@@ -3,6 +3,8 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Remove nginx-otel and naxsi
   * Update njs to 0.9.9 (9ead4e71f74a27279f3212bdb6cadb0e86981a1b)
   * Update to nginx-tests (b13be378294360c9a2b1386dce71936a455daf6e)
+  * Update lua-nginx-module (56b461147bb9eee350f682b1d97e44867d49857d)
+  * Update lua-resty-core (9f8dc0500ea288c70dd81d9fbd77df9d74405787)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
