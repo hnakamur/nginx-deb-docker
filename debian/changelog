@@ -5,6 +5,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update to nginx-tests (b13be378294360c9a2b1386dce71936a455daf6e)
   * Update lua-nginx-module (56b461147bb9eee350f682b1d97e44867d49857d)
   * Update lua-resty-core (9f8dc0500ea288c70dd81d9fbd77df9d74405787)
+  * Update echo-nginx-module (1965ee83b8a7842305c34c8b957090fb5a5473dc)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
