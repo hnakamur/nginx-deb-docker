@@ -10,6 +10,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update lua-resty-balancer (22fafb19b2df8f0810ce2ba4f73eb6b55c85bc51)
   * Update lua-resty-dns (58c6dc9d2a98009f7909592d4f1d967b30c86aff)
   * Update lua-resty-limit-traffic (f7a63e6fc94969cd923af44ec816ac28be73d55b)
+  * Update lua-resty-lock (a53daaf2194aeaa2dc83b692836fc9d260aec384)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
