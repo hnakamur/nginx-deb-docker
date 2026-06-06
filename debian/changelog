@@ -18,6 +18,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update lua-resty-redis (4c1e3757998e53bf032bf3c9293ba31ced1ca85d)
   * Update lua-resty-shell (85aef1e0510f34cae48f6532bf619fc398f82d44)
   * Update lua-resty-string (e10c1cc2ca85ea277a8d759333444f37f77c884c)
+  * Update lua-resty-upload (dc8370289eedba2d7f337475d229439b946b4c14)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
