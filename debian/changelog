@@ -21,6 +21,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update lua-resty-upload (dc8370289eedba2d7f337475d229439b946b4c14)
   * Update lua-resty-upstream-healthcheck (a8e4815c449e20a00fda066c19f758dc91b68640)
   * Update lua-resty-websocket (8b0469fc4c2e2bef62004f1c6a12f699387d2640)
+  * Update lua-upstream-nginx-module (a1c451affc75c757c2b23e2dcf8f56ec2efc6ab0)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
