@@ -8,6 +8,7 @@ nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
   * Update headers-more-nginx-module (0bf283ff92017acd616814b0e5153e0ccf93e2c9)
   * Remove naxsi
   * Update lua-resty-balancer (22fafb19b2df8f0810ce2ba4f73eb6b55c85bc51)
+  * Update lua-resty-dns (58c6dc9d2a98009f7909592d4f1d967b30c86aff)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sun, 07 Jun 2026 08:07:06 +0900
 
