@@ -8,6 +8,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update echo-nginx-module (1965ee83b8a7842305c34c8b957090fb5a5473dc)
   * Update headers-more-nginx-module (0bf283ff92017acd616814b0e5153e0ccf93e2c9)
   * Update lua-resty-balancer (22fafb19b2df8f0810ce2ba4f73eb6b55c85bc51)
+  * Update lua-resty-dns (58c6dc9d2a98009f7909592d4f1d967b30c86aff)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
