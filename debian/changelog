@@ -25,6 +25,7 @@ nginx (1.30.2+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
   * Update memc-nginx-module (38a23c3f525d23d54f90b4b7737591bd69a14bbc)
   * Update redis2-nginx-module (55eea7a18e710620076cc6df39b24b431c24c628)
   * Update set-misc-nginx-module (6c539186a5c96a24229f069a8e264bf32a7c858b)
+  * Update srcache-nginx-module (2372ccdaf528d128dbaee8c0fa67fea52f6bf1a6)
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 06 Jun 2026 14:54:48 +0900
 
