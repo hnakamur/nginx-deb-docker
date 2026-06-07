@@ -133,7 +133,7 @@ config.status.nginx: config.env.nginx
 		--add-dynamic-module=./nginx-ssl-fingerprint \
 		--with-openssl=./openssl \
 		--with-openssl-opt="no-apps no-legacy no-idea no-mdc2 no-rc5 no-zlib no-ssl3 no-tests no-ssl3-method enable-rfc3779 enable-cms no-capieng no-rdrand" \
-		--without-pcre2 \
+		--with-pcre-jit \
 		--with-cc-opt="$(CFLAGS)" \
 		--with-ld-opt="$(LDFLAGS)"
 	touch $@
@@ -210,7 +210,7 @@ config.status.nginx_debug: config.env.nginx_debug
 		--add-dynamic-module=./nginx-ssl-fingerprint \
 		--with-openssl=./openssl \
 		--with-openssl-opt="no-apps no-legacy no-idea no-mdc2 no-rc5 no-zlib no-ssl3 no-tests no-ssl3-method enable-rfc3779 enable-cms no-capieng no-rdrand" \
-		--without-pcre2 \
+		--with-pcre-jit \
 		--with-cc-opt="$(CFLAGS)" \
 		--with-ld-opt="$(LDFLAGS)" \
 		--with-debug

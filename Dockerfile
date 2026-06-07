@@ -6,7 +6,7 @@ FROM ${OS_TYPE}:${OS_VERSION}
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata apt-utils \
     gcc make \
-    debhelper dpkg-dev quilt lsb-release libssl-dev libpcre3-dev zlib1g-dev \
+    debhelper dpkg-dev quilt lsb-release libssl-dev libpcre2-dev zlib1g-dev \
     libexpat1-dev libxslt1-dev libgd-dev libgeoip-dev libmhash-dev libmaxminddb-dev \
     libperl-dev \
     # libmodsecurity dependencies
@@ -28,9 +28,7 @@ RUN apt-get update && \
     opensc \
     uwsgi \
     uwsgi-plugin-python3 \
-    rake \
-    # for nginx-otel module
-    git cmake libpcre3-dev pkg-config libc-ares-dev libre2-dev
+    rake
 
 # create symbolic links for nginx-tests
 RUN mkdir -p /usr/local/lib/engines

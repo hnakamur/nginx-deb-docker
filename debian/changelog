@@ -1,4 +1,4 @@
-nginx (1.31.1+openssl.3.5.5+mod.2-1hn1DebRel) UNRELEASED; urgency=medium
+nginx (1.31.1+openssl.3.5.6+mod.2-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Update nginx-tests (b13be378294360c9a2b1386dce71936a455daf6e)
   * Update ModSecurity-nginx (9eb44fd9ab0988756e1ab8ce5aa5548ddbe57846)
