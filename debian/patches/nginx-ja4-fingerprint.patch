@@ -1,6 +1,8 @@
+diff --git a/src/event/ngx_event_openssl.c b/src/event/ngx_event_openssl.c
+index 1653be0c3..e20a420ac 100644
 --- a/src/event/ngx_event_openssl.c
 +++ b/src/event/ngx_event_openssl.c
-@@ -2197,6 +2197,291 @@
+@@ -2197,6 +2197,296 @@ ngx_ssl_set_session(ngx_connection_t *c, ngx_ssl_session_t *session)
  }
  
  
@@ -63,6 +65,10 @@
 +    return ngx_copy(dest, &val, sizeof(uint16_t));
 +}
 +
++#if (defined OPENSSL_IS_AWSLC)
++#define SSL_client_hello_get0_received_ext SSL_client_hello_get_extension_order
++#endif
++
 +int
 +ngx_ssl_client_hello_ja4_cb(SSL *s, int *al, void *arg)
 +{
@@ -111,7 +117,6 @@
 +    if (ja->data == NULL) {
 +        ngx_log_error(NGX_LOG_ERR, c->log, 0, "ngx_ssl_client_hello_ja4_cb "
 +                      "out of memory for fp_ja3_data");
-+        ja->len = 0;
 +        goto failed;
 +    }
 +
@@ -159,7 +164,7 @@
 +    if (ptr != ja->data + ja->len) {
 +        ngx_log_error(NGX_LOG_ERR, c->log, 0, "ngx_ssl_client_hello_ja4_cb "
 +                      "length mismatch for ja3");
-+        ja->data = NULL;
++        goto failed;
 +    }
 +
 +    /* ja4 */
@@ -189,7 +194,6 @@
 +    if (ja->data == NULL) {
 +        ngx_log_error(NGX_LOG_ERR, c->log, 0, "ngx_ssl_client_hello_ja4_cb "
 +                      "out of memory for fp_ja4_data");
-+        ja->len = 0;
 +        goto failed;
 +    }
 +
@@ -241,7 +245,6 @@
 +            ngx_log_error(NGX_LOG_ERR, c->log, 0,
 +                          "ngx_ssl_client_hello_ja4_cb "
 +                          "too short alpn_len=%d", alpn_len);
-+            ja->data = NULL;
 +            goto failed;
 +        }
 +
@@ -251,7 +254,6 @@
 +                          "ngx_ssl_client_hello_ja4_cb "
 +                          "invalid first_alpn_len=%d, alpn_len=%d",
 +                          first_alpn_len, alpn_len);
-+            ja->data = NULL;
 +            goto failed;
 +        }
 +
@@ -278,12 +280,17 @@
 +    if (ptr != ja->data + ja->len) {
 +        ngx_log_error(NGX_LOG_ERR, c->log, 0, "ngx_ssl_client_hello_ja4_cb "
 +                      "length mismatch for ja4");
-+        ja->data = NULL;
++        goto failed;
 +    }
 +
 +    ngx_log_error(NGX_LOG_NOTICE, c->log, 0, "ja4_cb exit");
 +
++    return SSL_CLIENT_HELLO_SUCCESS;
++
 +failed:
++    free(ja->data);
++    ja->data = NULL;
++    ja->len = 0;
 +    return SSL_CLIENT_HELLO_SUCCESS;
 +}
 +
@@ -292,7 +299,7 @@
  ngx_int_t
  ngx_ssl_handshake(ngx_connection_t *c)
  {
-@@ -2216,6 +2501,11 @@
+@@ -2216,6 +2506,11 @@ ngx_ssl_handshake(ngx_connection_t *c)
  
      ngx_ssl_clear_error(c->log);
  
@@ -304,9 +311,11 @@
      n = SSL_do_handshake(c->ssl->connection);
  
      ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_do_handshake: %d", n);
+diff --git a/src/event/ngx_event_openssl.h b/src/event/ngx_event_openssl.h
+index 79ae39503..1c2c34ec9 100644
 --- a/src/event/ngx_event_openssl.h
 +++ b/src/event/ngx_event_openssl.h
-@@ -149,6 +149,17 @@
+@@ -149,6 +149,17 @@ struct ngx_ssl_connection_s {
      unsigned                    early_preread:1;
      unsigned                    write_blocked:1;
      unsigned                    sni_accepted:1;
@@ -324,9 +333,11 @@
  };
  
  
+diff --git a/src/http/v2/ngx_http_v2.c b/src/http/v2/ngx_http_v2.c
+index 69cb0ae09..270c5e834 100644
 --- a/src/http/v2/ngx_http_v2.c
 +++ b/src/http/v2/ngx_http_v2.c
-@@ -307,6 +307,8 @@
+@@ -307,6 +307,8 @@ ngx_http_v2_init(ngx_event_t *rev)
          ngx_add_timer(rev, cscf->client_header_timeout);
      }
  
@@ -335,7 +346,7 @@
      c->idle = 1;
      ngx_reusable_connection(c, 0);
  
-@@ -1358,6 +1360,14 @@
+@@ -1358,6 +1360,14 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
          }
      }
  
@@ -350,7 +361,7 @@
      return ngx_http_v2_state_header_block(h2c, pos, end);
  
  rst_stream:
-@@ -1781,6 +1791,9 @@
+@@ -1781,6 +1791,9 @@ ngx_http_v2_state_process_header(ngx_http_v2_connection_t *h2c, u_char *pos,
      }
  
      if (header->name.data[0] == ':') {
@@ -360,7 +371,7 @@
          rc = ngx_http_v2_pseudo_header(r, header);
  
          if (rc == NGX_OK) {
-@@ -2209,6 +2222,12 @@
+@@ -2209,6 +2222,12 @@ ngx_http_v2_state_settings_params(ngx_http_v2_connection_t *h2c, u_char *pos,
          ngx_log_debug2(NGX_LOG_DEBUG_HTTP, h2c->connection->log, 0,
                         "http2 setting %ui:%ui", id, value);
  
@@ -373,7 +384,7 @@
          switch (id) {
  
          case NGX_HTTP_V2_INIT_WINDOW_SIZE_SETTING:
-@@ -2493,6 +2512,9 @@
+@@ -2493,6 +2512,9 @@ ngx_http_v2_state_window_update(ngx_http_v2_connection_t *h2c, u_char *pos,
      }
  
      h2c->send_window += window;
@@ -383,6 +394,8 @@
  
      while (!ngx_queue_empty(&h2c->waiting)) {
          q = ngx_queue_head(&h2c->waiting);
+diff --git a/src/http/v2/ngx_http_v2.h b/src/http/v2/ngx_http_v2.h
+index 9605c8a23..026f3c7d7 100644
 --- a/src/http/v2/ngx_http_v2.h
 +++ b/src/http/v2/ngx_http_v2.h
 @@ -17,6 +17,8 @@
@@ -394,7 +407,7 @@
  #define NGX_HTTP_V2_DEFAULT_FRAME_SIZE   (1 << 14)
  #define NGX_HTTP_V2_MAX_FRAME_SIZE       ((1 << 24) - 1)
  
-@@ -121,6 +123,12 @@
+@@ -121,6 +123,12 @@ typedef struct {
  } ngx_http_v2_hpack_t;
  
  
@@ -407,7 +420,7 @@
  struct ngx_http_v2_connection_s {
      ngx_connection_t                *connection;
      ngx_http_connection_t           *http_connection;
-@@ -168,6 +176,13 @@
+@@ -168,6 +176,13 @@ struct ngx_http_v2_connection_s {
      unsigned                         table_update:1;
      unsigned                         blocked:1;
      unsigned                         goaway:1;

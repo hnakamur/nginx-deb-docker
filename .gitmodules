@@ -164,9 +164,9 @@
 [submodule "modules/lua-resty-worker-events"]
 	path = modules/lua-resty-worker-events
 	url = https://github.com/Kong/lua-resty-worker-events
-[submodule "modules/openssl"]
-	path = modules/openssl
-	url = https://github.com/openssl/openssl
 [submodule "modules/nginx-ssl-fingerprint"]
 	path = modules/nginx-ssl-fingerprint
 	url = https://github.com/hnakamur/nginx-ssl-fingerprint
+[submodule "modules/aws-lc"]
+	path = modules/aws-lc
+	url = https://github.com/aws/aws-lc

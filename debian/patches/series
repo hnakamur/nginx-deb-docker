@@ -9,4 +9,3 @@ nginx-1.17.3-cache_manager.patch
 nginx_ltsv_http_log.patch
 freenginx-upstream-age.patch
 nginx-ja4-fingerprint.patch
-nginx-openssl-SSL_client_hello_get0_received_ext.patch
