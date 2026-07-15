@@ -13,12 +13,12 @@ SHELL := /bin/bash
 deb-ubuntu2604: build-ubuntu2604
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04:/dist nginx-ubuntu2604 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
-	docker run --rm -it nginx-ubuntu2604 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.log || :
-	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.log
-	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/
+	docker run --rm -it nginx-ubuntu2604 /src/run-nginx-tests.sh 2>&1 | tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.log || :
+	xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.log
+	tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/
 
 build-ubuntu2604:
-	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04
+	mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04
 	PKG_REL_DISTRIB=ubuntu26.04; \
 	(set -x; \
 	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
@@ -33,8 +33,8 @@ build-ubuntu2604:
 		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
 		--build-arg MODSECURITY_DEB_OS_ID=ubuntu26.04 \
 		-t nginx-ubuntu2604 . \
-	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
-	sudo xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
+	xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2604:
 	docker run --rm -it nginx-ubuntu2604 bash
@@ -43,12 +43,12 @@ run-ubuntu2604:
 deb-ubuntu2404: build-ubuntu2404
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04:/dist nginx-ubuntu2404 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
-	docker run --rm -it nginx-ubuntu2404 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log || :
-	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log
-	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/
+	docker run --rm -it nginx-ubuntu2404 /src/run-nginx-tests.sh 2>&1 | tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log || :
+	xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.log
+	tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/
 
 build-ubuntu2404:
-	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04
+	mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04
 	PKG_REL_DISTRIB=ubuntu24.04; \
 	(set -x; \
 	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
@@ -63,8 +63,8 @@ build-ubuntu2404:
 		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
 		--build-arg MODSECURITY_DEB_OS_ID=ubuntu24.04 \
 		-t nginx-ubuntu2404 . \
-	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
-	sudo xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
+	xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2404:
 	docker run --rm -it nginx-ubuntu2404 bash
@@ -73,12 +73,12 @@ run-ubuntu2404:
 deb-ubuntu2204: build-ubuntu2204
 	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04:/dist nginx-ubuntu2204 bash -c \
 	"cp /src/*${PKG_VERSION}* /dist/"
-	docker run --rm -it nginx-ubuntu2204 /src/run-nginx-tests.sh 2>&1 | sudo tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log || :
-	sudo xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
-	sudo tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/
+	docker run --rm -it nginx-ubuntu2204 /src/run-nginx-tests.sh 2>&1 | tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log || :
+	xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.log
+	tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/
 
 build-ubuntu2204:
-	sudo mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04
+	mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04
 	PKG_REL_DISTRIB=ubuntu22.04; \
 	(set -x; \
 	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
@@ -93,8 +93,8 @@ build-ubuntu2204:
 		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
 		--build-arg MODSECURITY_DEB_OS_ID=ubuntu22.04 \
 		-t nginx-ubuntu2204 . \
-	) 2>&1 | sudo tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
-	sudo xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
+	xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2204:
 	docker run --rm -it nginx-ubuntu2204 bash
