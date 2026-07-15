@@ -1,6 +1,8 @@
+diff --git a/src/core/ngx_string.c b/src/core/ngx_string.c
+index 10fe764c3..52ff5ee76 100644
 --- a/src/core/ngx_string.c
 +++ b/src/core/ngx_string.c
-@@ -1990,6 +1990,59 @@
+@@ -1990,6 +1990,59 @@ ngx_escape_json(u_char *dst, u_char *src, size_t size)
  }
  
  
@@ -60,9 +62,11 @@
  void
  ngx_str_rbtree_insert_value(ngx_rbtree_node_t *temp,
      ngx_rbtree_node_t *node, ngx_rbtree_node_t *sentinel)
+diff --git a/src/core/ngx_string.h b/src/core/ngx_string.h
+index 183a20521..40b307f78 100644
 --- a/src/core/ngx_string.h
 +++ b/src/core/ngx_string.h
-@@ -213,6 +213,7 @@
+@@ -213,6 +213,7 @@ uintptr_t ngx_escape_uri(u_char *dst, u_char *src, size_t size,
  void ngx_unescape_uri(u_char **dst, u_char **src, size_t size, ngx_uint_t type);
  uintptr_t ngx_escape_html(u_char *dst, u_char *src, size_t size);
  uintptr_t ngx_escape_json(u_char *dst, u_char *src, size_t size);
@@ -70,9 +74,11 @@
  
  
  typedef struct {
+diff --git a/src/http/modules/ngx_http_log_module.c b/src/http/modules/ngx_http_log_module.c
+index 91589747e..d17965b6d 100644
 --- a/src/http/modules/ngx_http_log_module.c
 +++ b/src/http/modules/ngx_http_log_module.c
-@@ -93,6 +93,7 @@
+@@ -93,6 +93,7 @@ typedef struct {
  #define NGX_HTTP_LOG_ESCAPE_DEFAULT  0
  #define NGX_HTTP_LOG_ESCAPE_JSON     1
  #define NGX_HTTP_LOG_ESCAPE_NONE     2
@@ -80,18 +86,18 @@
  
  
  static void ngx_http_log_write(ngx_http_request_t *r, ngx_http_log_t *log,
-@@ -141,6 +142,10 @@
+@@ -141,6 +142,10 @@ static size_t ngx_http_log_json_variable_getlen(ngx_http_request_t *r,
      uintptr_t data);
  static u_char *ngx_http_log_json_variable(ngx_http_request_t *r, u_char *buf,
-     ngx_http_log_op_t *op);
+     u_char *end, ngx_http_log_op_t *op);
 +static size_t ngx_http_log_ltsv_variable_getlen(ngx_http_request_t *r,
 +    uintptr_t data);
 +static u_char *ngx_http_log_ltsv_variable(ngx_http_request_t *r, u_char *buf,
-+    ngx_http_log_op_t *op);
++    u_char *end, ngx_http_log_op_t *op);
  static size_t ngx_http_log_unescaped_variable_getlen(ngx_http_request_t *r,
      uintptr_t data);
  static u_char *ngx_http_log_unescaped_variable(ngx_http_request_t *r,
-@@ -931,6 +936,11 @@
+@@ -997,6 +1002,11 @@ ngx_http_log_variable_compile(ngx_conf_t *cf, ngx_http_log_op_t *op,
          op->run = ngx_http_log_json_variable;
          break;
  
@@ -103,10 +109,11 @@
      case NGX_HTTP_LOG_ESCAPE_NONE:
          op->getlen = ngx_http_log_unescaped_variable_getlen;
          op->run = ngx_http_log_unescaped_variable;
-@@ -1090,6 +1100,47 @@
+@@ -1186,6 +1196,60 @@ ngx_http_log_json_variable(ngx_http_request_t *r, u_char *buf, u_char *end,
+ }
  
  
- static size_t
++static size_t
 +ngx_http_log_ltsv_variable_getlen(ngx_http_request_t *r, uintptr_t data)
 +{
 +    uintptr_t                   len;
@@ -127,9 +134,10 @@
 +
 +
 +static u_char *
-+ngx_http_log_ltsv_variable(ngx_http_request_t *r, u_char *buf,
++ngx_http_log_ltsv_variable(ngx_http_request_t *r, u_char *buf, u_char *end,
 +    ngx_http_log_op_t *op)
 +{
++    uintptr_t                   len;
 +    ngx_http_variable_value_t  *value;
 +
 +    value = ngx_http_get_indexed_variable(r, op->data);
@@ -139,19 +147,30 @@
 +    }
 +
 +    if (value->escape == 0) {
++        if (ngx_http_log_check_length(r, buf, end, value->len) != NGX_OK) {
++            return NULL;
++        }
++
 +        return ngx_cpymem(buf, value->data, value->len);
 +
 +    } else {
++        len = ngx_escape_ltsv(NULL, value->data, value->len);
++
++        if (ngx_http_log_check_length(r, buf, end, value->len + len)
++            != NGX_OK)
++        {
++            return NULL;
++        }
++
 +        return (u_char *) ngx_escape_ltsv(buf, value->data, value->len);
 +    }
 +}
 +
 +
-+static size_t
+ static size_t
  ngx_http_log_unescaped_variable_getlen(ngx_http_request_t *r, uintptr_t data)
  {
-     ngx_http_variable_value_t  *value;
-@@ -1601,6 +1652,9 @@
+@@ -1716,6 +1780,9 @@ ngx_http_log_compile_format(ngx_conf_t *cf, ngx_array_t *flushes,
          } else if (ngx_strcmp(data, "none") == 0) {
              escape = NGX_HTTP_LOG_ESCAPE_NONE;
  
