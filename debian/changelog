@@ -1,3 +1,9 @@
+nginx (1.31.4+openssl.3.5.7+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * nginx 1.31.4
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 20 Aug 2026 04:33:22 +0900
+
 nginx (1.31.3+openssl.3.5.7+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.31.3

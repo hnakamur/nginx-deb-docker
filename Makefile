@@ -1,4 +1,4 @@
-PKG_VERSION=1.31.3+openssl.3.5.7+mod.1
+PKG_VERSION=1.31.4+openssl.3.5.7+mod.1
 PKG_REL_PREFIX=1hn1
 ifdef NO_CACHE
 DOCKER_NO_CACHE=--no-cache

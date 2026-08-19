@@ -266,7 +266,7 @@ cache validity time.
  
  
  #define NGX_HTTP_UPSTREAM_NOTIFY_HEADER      0x1
-@@ -305,14 +306,17 @@
+@@ -308,14 +309,17 @@
  
      ngx_table_elt_t                 *cache_control;
      ngx_table_elt_t                 *set_cookie;
