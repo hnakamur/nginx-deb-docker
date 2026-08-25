@@ -21,7 +21,7 @@ Subject: [PATCH] Add SSL_client_hello_get0_received_ext
  
 --- a/openssl/ssl/ssl_lib.c
 +++ b/openssl/ssl/ssl_lib.c
-@@ -6883,6 +6883,41 @@
+@@ -6908,6 +6908,41 @@
      return 1;
  }
  
