@@ -23,7 +23,7 @@ Subject: [PATCH] Add request_body_length variable
  
 --- a/src/http/ngx_http_request.h
 +++ b/src/http/ngx_http_request.h
-@@ -455,6 +455,7 @@
+@@ -456,6 +456,7 @@
      size_t                            header_size;
  
      off_t                             request_length;
@@ -83,7 +83,7 @@ Subject: [PATCH] Add request_body_length variable
      return NGX_OK;
 --- a/src/http/v2/ngx_http_v2.c
 +++ b/src/http/v2/ngx_http_v2.c
-@@ -3895,6 +3895,7 @@
+@@ -3898,6 +3898,7 @@
      h2c = r->stream->connection;
  
      h2c->payload_bytes += r->request_length;
