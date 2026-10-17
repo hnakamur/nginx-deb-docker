@@ -39,4 +39,4 @@ Origin: https://raw.githubusercontent.com/openresty/openresty/dbccee1418ddb24a2a
 +
      err = (sslerr == SSL_ERROR_SYSCALL) ? ngx_errno : 0;
  
-     c->ssl->no_wait_shutdown = 1;
+     if (sslerr == SSL_ERROR_SYSCALL && ERR_peek_error() == 0 && err == 0) {

@@ -1,3 +1,11 @@
+nginx (1.31.7+openssl.3.5.9+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * nginx 1.31.7
+  * OpenSSL 3.5.9
+  * Remove http2 fingerprint support
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 17 Oct 2026 17:06:56 +0900
+
 nginx (1.31.6+openssl.3.5.8+mod.1-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * nginx 1.31.6
