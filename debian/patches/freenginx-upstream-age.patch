@@ -99,7 +99,7 @@ cache validity time.
      { ngx_null_string, 0 }
  };
  
-@@ -5162,14 +5176,15 @@
+@@ -5157,14 +5171,15 @@
              return NGX_OK;
          }
  
@@ -117,7 +117,7 @@ cache validity time.
      }
  
  extensions:
-@@ -5350,6 +5365,7 @@
+@@ -5345,6 +5360,7 @@
              r->cache->valid_sec = ngx_time() + n;
              u->headers_in.no_cache = 0;
              u->headers_in.expired = 0;
@@ -125,7 +125,7 @@ cache validity time.
              return NGX_OK;
          }
      }
-@@ -5363,6 +5379,7 @@
+@@ -5358,6 +5374,7 @@
          r->cache->valid_sec = n;
          u->headers_in.no_cache = 0;
          u->headers_in.expired = 0;
@@ -133,7 +133,7 @@ cache validity time.
      }
      }
  #endif
-@@ -5653,6 +5670,61 @@
+@@ -5648,6 +5665,61 @@
  
  
  static ngx_int_t
@@ -195,7 +195,7 @@ cache validity time.
  ngx_http_upstream_copy_header_line(ngx_http_request_t *r, ngx_table_elt_t *h,
      ngx_uint_t offset)
  {
-@@ -6403,6 +6475,60 @@
+@@ -6398,6 +6470,60 @@
  
      return NGX_OK;
  }
