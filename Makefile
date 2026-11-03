@@ -3,11 +3,41 @@ PKG_REL_PREFIX=1hn1
 ifdef NO_CACHE
 DOCKER_NO_CACHE=--no-cache
 endif
-LUAJIT_DEB_VERSION=2.1.20260311-1hn1
-MODSECURITY_DEB_VERSION=3.0.14-1hn3
+LUAJIT_DEB_VERSION=2.1.20261021-1hn1
+MODSECURITY_DEB_VERSION=3.0.16-1hn1
 
 SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -c
+
+# Debian 13
+deb-debian13: build-debian13
+	docker run --rm -v ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13:/dist nginx-debian13 bash -c \
+	"cp /src/*${PKG_VERSION}* /dist/"
+	docker run --rm -it nginx-debian13 /src/run-nginx-tests.sh 2>&1 | tee ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian13.log || :
+	xz --force ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13/nginx-tests-${PKG_VERSION}-${PKG_REL_PREFIX}debian13.log
+	tar zcf nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13.tar.gz ./nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13/
+
+build-debian13:
+	mkdir -p nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13
+	PKG_REL_DISTRIB=debian13; \
+	(set -x; \
+	git config -l | sed -n '/^submodule\.[^.]*\.url/{s|^submodule\.||;s|\.url=|=|;p}' | sort; \
+	git submodule status; \
+	docker buildx build --progress plain --load \
+		${DOCKER_NO_CACHE} \
+		--build-arg OS_TYPE=debian --build-arg OS_VERSION=13 \
+		--build-arg PKG_REL_DISTRIB=$${PKG_REL_DISTRIB} \
+		--build-arg PKG_VERSION=${PKG_VERSION} \
+		--build-arg LUAJIT_DEB_VERSION=${LUAJIT_DEB_VERSION} \
+		--build-arg LUAJIT_DEB_OS_ID=debian13 \
+		--build-arg MODSECURITY_DEB_VERSION=${MODSECURITY_DEB_VERSION} \
+		--build-arg MODSECURITY_DEB_OS_ID=debian13 \
+		-t nginx-debian13 . \
+	) 2>&1 | tee nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log && \
+	xz --force nginx-${PKG_VERSION}-${PKG_REL_PREFIX}debian13/nginx_${PKG_VERSION}-${PKG_REL_PREFIX}${PKG_REL_DISTRIB}.build.log
+
+run-debian13:
+	docker run --rm -it nginx-debian13 bash
 
 # Ubuntu 26.04
 deb-ubuntu2604: build-ubuntu2604
