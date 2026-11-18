@@ -83,7 +83,7 @@ Subject: [PATCH] Add request_body_length variable
      return NGX_OK;
 --- a/src/http/v2/ngx_http_v2.c
 +++ b/src/http/v2/ngx_http_v2.c
-@@ -3898,6 +3898,7 @@
+@@ -3900,6 +3900,7 @@
      h2c = r->stream->connection;
  
      h2c->payload_bytes += r->request_length;
